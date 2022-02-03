@@ -1,18 +1,22 @@
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_std.all;
 
 entity LCD_User_Logic is
-    Port ( iClk : in STD_LOGIC; -- 50 MHz    
-           reset : in std_logic;
-			  speed_sel : in std_logic_vector(1 downto 0); --60, 120, or 1000 Hz
+    Port ( iClk          : in std_logic;                     --50 MHz    
+           reset         : in std_logic;
 			  
-			  byte_start : in integer range 0 to 94;
-			  byte_end : in integer range 0 to 94;
+			  speed_sel     : in std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
 			  
-           Data : out STD_LOGIC_VECTOR (7 downto 0); -- to LCD
-           en   : out STD_LOGIC;                     --to LCD
-           rs   : out STD_LOGIC                      --to LCD
+			  byte_start    : in integer range 0 to 94;         --inclusive start for byteSel
+			  byte_end      : in integer range 0 to 94;         --inclusive end for byteSel
+			  
+			  data_ascii    : in std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
+			  address_ascii : in std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
+
+           Data : out std_logic_vector (7 downto 0);         --to LCD
+           en   : out std_logic;                             --to LCD
+           rs   : out std_logic                              --to LCD
      ); 
 end LCD_User_Logic;
 
@@ -20,12 +24,12 @@ architecture Behavioral of LCD_User_Logic is
 
 component LCD_Transmitter is
     port(
-        iClk : in STD_LOGIC;
-        reset : in std_logic;
-        ena : in std_logic;
-        
-        busy : out std_logic;
-        en     : out STD_LOGIC --to LCD
+        iClk          : in std_logic;
+        reset         : in std_logic;
+        ena           : in std_logic;
+		  
+        busy          : out std_logic;
+        en            : out std_logic                        --to LCD
     );
 end component;
 
@@ -42,6 +46,7 @@ signal currentRS : std_logic;
 signal byteSel : integer range 0 to 94 := 0;
 signal count : unsigned(27 DOWNTO 0):=X"000000F";
 signal ena : std_logic;
+signal byte_end_int : integer range 0 to 94;
 
 begin
 
@@ -164,6 +169,7 @@ process(iClk, reset_h)
     begin
         if(reset_h = '1') then
             byteSel <= 0;
+				byte_end_int <= byte_end;
         elsif(rising_edge(iClk)) then
             case state is
                 when start => 
@@ -196,14 +202,22 @@ process(iClk, reset_h)
                     end if;
                 
                 when repeat =>
-                    if byteSel < 29 then
+                    if byteSel < byte_end_int then
                         byteSel <= byteSel + 1;
-                    else 
-                        byteSel <= 22;
+                    else
+								if byte_end_int = byte_end then
+									case(speed_sel) is
+										when "00" => byteSel <= byte_start; byte_end_int <= byte_end; --not running
+										when "01" => byteSel <= 77;         byte_end_int <= 81; --60 hz
+										when "10" => byteSel <= 82;         byte_end_int <= 87; --120 hz
+										when "11" => byteSel <= 88;         byte_end_int <= 94; --1000 hz
+									end case;
+								else
+									byteSel      <= byte_start;
+									byte_end_int <= byte_end;
+								end if;
                     end if;
                     state <= start;
-                
-                when others => null;
             end case;
         end if;
     end process;
