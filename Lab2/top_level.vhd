@@ -40,6 +40,31 @@ entity top_level is
 end top_level;
 
 architecture behavioral of top_level is
+	component system_controller is
+		port(
+			--General Inputs
+			clk          : in    std_logic;                     --50 MHz
+			reset_h      : in    std_logic;                     --active-high reset
+			pause_btn    : in    std_logic;                     --switch between pause and test states
+			pwm_btn      : in    std_logic;                     --switch between Test and PWM
+			speed_btn    : in    std_logic;                     --change speeds
+			
+			--LCD Connections
+			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
+			byte_start   : out   integer range 0 to 94;         --starting byte
+			byte_end     : out   integer range 0 to 94;         --ending byte
+			
+			--SRAM Controller Connections
+			SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
+			data_i       : in    std_logic_vector(15 downto 0); --16-bit data
+			data_o       : out   std_logic_vector(15 downto 0); --16-bit data
+			data_select  : out   std_logic;                     --data select for multiplexor, 0 is us, 1 is ROM
+			address_out  : out   std_logic_vector(7 downto 0);  --8-bit address
+			SRAM_rw      : out   std_logic;                     --1 is read, 0 is write
+			SRAM_valid   : out   std_logic                      --is our data valid to be computed by the SRAM
+		);
+	end component;
+
 	component SRAM_Controller is
 		generic(
 			IO_WIDTH 			 : integer := 16; --Width of the I/O Datapath
@@ -97,28 +122,45 @@ architecture behavioral of top_level is
 			data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
 			address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
 
-			Data          : out std_logic_vector (7 downto 0); --to LCD
+			data          : out std_logic_vector (7 downto 0); --to LCD
 			en            : out std_logic;                     --to LCD
 			rs            : out std_logic                      --to LCD
 		); 
 	end component;
 	
-	component i2c_master is
-	  generic(
-		 input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
-		 bus_clk   : INTEGER := 400_000);   --speed the i2c bus (scl) will run at in Hz
-	  port(
-		 clk       : IN     STD_LOGIC;                    --system clock
-		 reset_n   : IN     STD_LOGIC;                    --active low reset
-		 ena       : IN     STD_LOGIC;                    --latch in command
-		 addr      : IN     STD_LOGIC_VECTOR(6 DOWNTO 0); --address of target slave
-		 rw        : IN     STD_LOGIC;                    --'0' is write, '1' is read
-		 data_wr   : IN     STD_LOGIC_VECTOR(7 DOWNTO 0); --data to write to slave
-		 busy      : OUT    STD_LOGIC;                    --indicates transaction in progress
-		 data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
-		 ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
-		 sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
-		 scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
+	component btn_debounce_toggle is
+		generic (
+			constant CNTR_MAX : std_logic_vector(15 downto 0) := X"FFFF");
+		 port( 
+			BTN_I 	: in  std_logic;
+		   CLK 		: in  std_logic;
+		   BTN_O 	: out std_logic;
+		   pulse_O   :out std_logic;
+		   TOGGLE_O : out std_logic
+		);
+	end component;
+	
+	component PWM is
+		port(
+			--INS
+			clk 		: in std_logic;
+			reset 	: in std_logic := '0';
+			clk_en 	: in std_logic;
+			value_i  : in std_logic_vector(15 downto 0);
+			
+			--OUTS
+			pwm_o		: out std_logic
+		);
+	end component;
+	
+	component HEX_to_ASCII is
+		port(
+			--IN
+			HEX_i : in std_logic_vector(3 downto 0);
+			
+			--OUT
+			ASCII_o : out std_logic_vector(7 downto 0)
+			);
 	end component;
 
 --SIGNALS
