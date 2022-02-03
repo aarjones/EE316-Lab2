@@ -36,57 +36,57 @@ architecture behavioral of system_controller is
 	
 	--Process for state machine
 	process(clk) begin
-	if rising_edge(clk) then
-		if reset_h = '0' then
-			case(state) is 
-				when init =>
-					SRAM_rw_int <= '0';                                       --we're writing
-					data_select <= '0';                                       --reading from ROM
-					address_out <= std_logic_vector(to_unsigned(ROM_cnt, 8)); --convert the ROM_cnt to address
-					if SRAM_busy_h = '0' then                                 --if the controller is ready
-						SRAM_valid_o <= '1';                                  --take in the next value
-						if to_increment = '1' then
-							ROM_cnt <= ROM_cnt + 1;
-							to_increment <= '0';
+		if rising_edge(clk) then
+			if reset_h = '0' then
+				case(state) is 
+					when init =>
+						SRAM_rw_int <= '0';                                       --we're writing
+						data_select <= '0';                                       --reading from ROM
+						address_out <= std_logic_vector(to_unsigned(ROM_cnt, 8)); --convert the ROM_cnt to address
+						if SRAM_busy_h = '0' then                                 --if the controller is ready
+							SRAM_valid_int <= '1';                                  --take in the next value
+							if to_increment = '1' then
+								ROM_cnt <= ROM_cnt + 1;
+								to_increment <= '0';
+							end if;
+							
+						elsif SRAM_valid_int = '1' then
+								SRAM_valid_int <= '0';                               --take valid back low
+								to_increment <= '1';                               --prepare for next count
 						end if;
+						if ROM_cnt = 256 then                                    --if we've reached the end
+							ROM_cnt     <= 0;
+							next_state  <= test;                                   --move to the next state
+							SRAM_rw_int <= '1';
+							address_cnt <= 0;
+							data_o   <= (others => '0');
+						end if;	
 						
-					elsif SRAM_valid_o = '1' then
-							SRAM_valid_o <= '0';                               --take valid back low
-							to_increment <= '1';                               --prepare for next count
-					end if;
-					if ROM_cnt = 256 then                                    --if we've reached the end
-						ROM_cnt     <= 0;
-						next_state  <= test;                                   --move to the next state
-						SRAM_rw_int <= '1';
-						address_cnt <= 0;
-						read_SRAM   <= '1';
-						data_io_o   <= (others => '0');
-					end if;	
+					when test =>
+						
+						
+					when pause =>
+						
+						
+					when pwm60 =>
+						
+						
+					when pwm120 =>
+						
 					
-				when test =>
-					
-					
-				when pause =>
-					
-					
-				when pwm60 =>
-					
-					
-				when pwm120 =>
-					
-				
-				when pwm1000 =>
-					
-					
-			end case;
-		elsif reset_h = '1' then
-			next_state <= init;             --move to init
-			data_o <= (others => '0');      --reset to 0s
-			address_out <= (others => '0'); --reset to 0s
-			SRAM_rw => '1';                 --reading
-			SRAM_valid_int => '0';          --reset to 0
-			ROM_cnt => 0;                   --reset to 0
-			address_cnt => 0;               --reset to 0
+					when pwm1000 =>
+						
+						
+				end case;
+			elsif reset_h = '1' then
+				next_state <= init;             --move to init
+				data_o <= (others => '0');      --reset to 0s
+				address_out <= (others => '0'); --reset to 0s
+				SRAM_rw <= '1';                 --reading
+				SRAM_valid_int <= '0';          --reset to 0
+				ROM_cnt <= 0;                   --reset to 0
+				address_cnt <= 0;               --reset to 0
+			end if;
 		end if;
 	end process;
 end behavioral;

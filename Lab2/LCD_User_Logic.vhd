@@ -6,6 +6,10 @@ entity LCD_User_Logic is
     Port ( iClk : in STD_LOGIC; -- 50 MHz    
            reset : in std_logic;
 			  speed_sel : in std_logic_vector(1 downto 0); --60, 120, or 1000 Hz
+			  
+			  byte_start : in integer range 0 to 94;
+			  byte_end : in integer range 0 to 94;
+			  
            Data : out STD_LOGIC_VECTOR (7 downto 0); -- to LCD
            en   : out STD_LOGIC;                     --to LCD
            rs   : out STD_LOGIC                      --to LCD
@@ -35,7 +39,7 @@ signal currentByte : std_logic_vector(7 downto 0);
 signal currentByte_wr : std_logic_vector(7 downto 0);
 signal RS_sig : std_logic;
 signal currentRS : std_logic;
-signal byteSel : integer range 0 to 29 := 0;
+signal byteSel : integer range 0 to 94 := 0;
 signal count : unsigned(27 DOWNTO 0):=X"000000F";
 signal ena : std_logic;
 
@@ -133,22 +137,25 @@ process(byteSel)
             when 73 => currentByte <= X"50"; RS_sig <= '1'; -- "P"
 				when 74 => currentByte <= X"57"; RS_sig <= '1'; -- "W"
             when 75 => currentByte <= X"4D"; RS_sig <= '1'; -- "M"
-            when 76 => currentByte <= X"C0"; RS_sig <= '0'; -- cursor bottom row
-            when 77 => currentByte <= X""; RS_sig <= '1'; -- "6"
-				when 78 => currentByte <= X"47"; RS_sig <= '1'; -- "G"
-            when 79 => currentByte <= X"65"; RS_sig <= '1'; -- "e"
-            when 80 => currentByte <= X"6E"; RS_sig <= '1'; -- "n"
-            when 81 => currentByte <= X"65"; RS_sig <= '1'; -- "e"
-				when 82 => currentByte <= X"72"; RS_sig <= '1'; -- "r"
-            when 83 => currentByte <= X"61"; RS_sig <= '1'; -- "a"
-            when 84 => currentByte <= X"74"; RS_sig <= '1'; -- "t"
-            when 85 => currentByte <= X"69"; RS_sig <= '1'; -- "i"
-				when 86 => currentByte <= X"6E"; RS_sig <= '1'; -- "n"
-            when 87 => currentByte <= X"67"; RS_sig <= '1'; -- "g"
-            when 88 => currentByte <= X"20"; RS_sig <= '1'; -- " "
-            when 89 => currentByte <= X"50"; RS_sig <= '1'; -- "P"
-				when 90 => currentByte <= X"57"; RS_sig <= '1'; -- "W"
-            when 91 => currentByte <= X"4D"; RS_sig <= '1'; -- "M"
+            when 76 => currentByte <= X"C0"; RS_sig <= '0'; -- cursor bottom row              --END NORMAL PWM GEN
+            when 77 => currentByte <= X"36"; RS_sig <= '1'; -- "6"
+				when 78 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
+            when 79 => currentByte <= X"20"; RS_sig <= '1'; -- " "
+            when 80 => currentByte <= X"48"; RS_sig <= '1'; -- "H"
+            when 81 => currentByte <= X"7A"; RS_sig <= '1'; -- "z"
+				when 82 => currentByte <= X"31"; RS_sig <= '1'; -- "1"
+            when 83 => currentByte <= X"32"; RS_sig <= '1'; -- "2"
+            when 84 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
+            when 85 => currentByte <= X"20"; RS_sig <= '1'; -- " "
+				when 86 => currentByte <= X"48"; RS_sig <= '1'; -- "H"
+            when 87 => currentByte <= X"7A"; RS_sig <= '1'; -- "z"
+            when 88 => currentByte <= X"31"; RS_sig <= '1'; -- "1"
+            when 89 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
+				when 90 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
+            when 91 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
+				when 92 => currentByte <= X"20"; RS_sig <= '1'; -- " "
+            when 93 => currentByte <= X"48"; RS_sig <= '1'; -- "H"
+            when 94 => currentByte <= X"7A"; RS_sig <= '1'; -- "z"
 				
         end case;
 end process;

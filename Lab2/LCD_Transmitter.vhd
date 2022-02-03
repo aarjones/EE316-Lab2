@@ -16,7 +16,9 @@ end LCD_Transmitter;
 architecture Behavioral of LCD_Transmitter is
 type stateType is (idle, zero, one);
 signal state : stateType;
+
 signal clk_en : std_logic;
+signal clk_cnt : integer range 0 to 83333;
 
 begin
 process(iClk, reset, ena)
@@ -51,13 +53,13 @@ end process;
 
 process(iClk)
 begin
-	if rising_edge(clk) then
+	if rising_edge(iClk) then
 			if (clk_cnt = 83333-1) then --600 Hz
 				clk_cnt <= 0;
-				clken <= '1';
+				clk_en <= '1';
 			else
 				clk_cnt <= clk_cnt + 1;
-				clken <= '0';
+				clk_en <= '0';
 			end if;
 		end if;
 end process;

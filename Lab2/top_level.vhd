@@ -24,7 +24,7 @@ entity top_level is
 		scl                    : inout std_logic; --I2C clock 
 		
 		--LCD Outputs
-		lcd_data               : out   std_logic(7 downto 0);
+		lcd_data               : out   std_logic_vector(7 downto 0);
 		lcd_en                 : out   std_logic; --lcd en signal
 		lcd_rs                 : out   std_logic; --lcd rs signal
 		
@@ -35,8 +35,7 @@ entity top_level is
 		sram_oe_n              : out   std_logic;
 		sram_ce_n              : out   std_logic;
 		sram_lb_n              : out   std_logic;
-		sram_ub_n              : out   std_logic;
-		
+		sram_ub_n              : out   std_logic		
 	);	
 end top_level;
 
@@ -83,10 +82,10 @@ architecture behavioral of top_level is
 			  signal iCLK : in std_logic;	
 			  signal oRESET : out std_logic
 				);	
-	end Reset_Delay;
+	end component;
 		
 	component LCD_User_Logic is
-		 port( iClk  : in std_logic`;                     -- 50 MHz    
+		 port( iClk  : in std_logic;                     -- 50 MHz    
 				 reset : in std_logic;
 				 Data  : out std_logic_vector (7 downto 0); -- to LCD
 			    en    : out std_logic;                     --to LCD
@@ -110,7 +109,7 @@ architecture behavioral of top_level is
 		 ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
 		 sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
 		 scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
-	end i2c_master;
+	end component;
 		
 begin
 --INSTANTIATIONS

@@ -42,10 +42,9 @@ ARCHITECTURE structural OF DE2_115 IS
 -- TOP LEVEL COMPONENT
 
 component top_level is
-		port(
-			
-		);
-end component top_level;
+--		port(
+--		);
+end component;
 
 --SIGNALS
 
