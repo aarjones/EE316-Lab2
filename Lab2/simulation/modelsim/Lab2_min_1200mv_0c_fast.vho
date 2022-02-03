@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version"
 
--- DATE "02/03/2022 17:40:06"
+-- DATE "02/03/2022 18:24:49"
 
 -- 
 -- Device: Altera EP4CE115F29C7 Package FBGA780

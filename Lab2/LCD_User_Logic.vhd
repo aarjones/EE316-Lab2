@@ -3,20 +3,21 @@ use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_std.all;
 
 entity LCD_User_Logic is
-    Port ( iClk          : in std_logic;                     --50 MHz    
-           reset         : in std_logic;
+    Port(
+			  iClk          : in  std_logic;                     --50 MHz    
+           reset         : in  std_logic;
 			  
-			  speed_sel     : in std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
+			  speed_sel     : in  std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 Hz
 			  
-			  byte_start    : in integer range 0 to 94;         --inclusive start for byteSel
-			  byte_end      : in integer range 0 to 94;         --inclusive end for byteSel
+			  byte_start    : in  integer range 0 to 94;         --inclusive start for byteSel
+			  byte_end      : in  integer range 0 to 94;         --inclusive end for byteSel
 			  
-			  data_ascii    : in std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
-			  address_ascii : in std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
+			  data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
+			  address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
 
-           Data : out std_logic_vector (7 downto 0);         --to LCD
-           en   : out std_logic;                             --to LCD
-           rs   : out std_logic                              --to LCD
+           Data          : out std_logic_vector (7 downto 0); --to LCD
+           en            : out std_logic;                     --to LCD
+           rs            : out std_logic                      --to LCD
      ); 
 end LCD_User_Logic;
 

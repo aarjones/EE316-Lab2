@@ -85,17 +85,27 @@ architecture behavioral of top_level is
 	end component;
 		
 	component LCD_User_Logic is
-		 port( iClk  : in std_logic;                     -- 50 MHz    
-				 reset : in std_logic;
-				 Data  : out std_logic_vector (7 downto 0); -- to LCD
-			    en    : out std_logic;                     --to LCD
-			    rs    : out std_logic                      --to LCD
-		  ); 
+		port(
+			iClk          : in  std_logic;                     --50 MHz    
+			reset         : in  std_logic;
+		  
+			speed_sel     : in  std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
+		  
+			byte_start    : in  integer range 0 to 94;         --inclusive start for byteSel
+			byte_end      : in  integer range 0 to 94;         --inclusive end for byteSel
+		  
+			data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
+			address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
+
+			Data          : out std_logic_vector (7 downto 0); --to LCD
+			en            : out std_logic;                     --to LCD
+			rs            : out std_logic                      --to LCD
+		); 
 	end component;
 	
 	component i2c_master is
 	  generic(
-		 input_clk : INTEGER := 100_000_000; --input clock speed from user logic in Hz
+		 input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
 		 bus_clk   : INTEGER := 400_000);   --speed the i2c bus (scl) will run at in Hz
 	  port(
 		 clk       : IN     STD_LOGIC;                    --system clock
@@ -110,9 +120,14 @@ architecture behavioral of top_level is
 		 sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
 		 scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
 	end component;
-		
-begin
---INSTANTIATIONS
+
 --SIGNALS
+signal reset_h : std_logic := '0';
+signal reset_delay_out : std_logic := '0';	
+begin
+--GENERAL CONNECTIONS
+reset_h <= not reset or reset_delay_out;
+
+--INSTANTIATIONS
 --OTHER LOGIC
 end behavioral;

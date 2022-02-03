@@ -1,5 +1,5 @@
 Fitter report for Lab2
-Thu Feb 03 17:39:39 2022
+Thu Feb 03 18:24:21 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -59,7 +59,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                        ;
 +------------------------------------+--------------------------------------------------+
-; Fitter Status                      ; Successful - Thu Feb 03 17:39:38 2022            ;
+; Fitter Status                      ; Successful - Thu Feb 03 18:24:21 2022            ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; Lab2                                             ;
 ; Top-level Entity Name              ; DE2_115                                          ;
@@ -145,12 +145,12 @@ applicable agreement for further details.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 3.50        ;
+; Average used               ; 1.00        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;  16.7%      ;
+;     Processors 2-16        ; < 0.1%      ;
 +----------------------------+-------------+
 
 
@@ -2114,12 +2114,12 @@ Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
     Info (170200): Optimizations that may affect the design's timing were skipped
-Info (11888): Total time spent on timing analysis during the Fitter is 0.08 seconds.
+Info (11888): Total time spent on timing analysis during the Fitter is 0.00 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (169064): Following 52 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
     Info (169065): Pin SRAM_DQ[0] has a permanently disabled output enable
     Info (169065): Pin SRAM_DQ[1] has a permanently disabled output enable
@@ -2175,8 +2175,8 @@ Warning (169064): Following 52 pins have no output enable or a GND or VCC output
     Info (169065): Pin GPIO[35] has a permanently disabled output enable
 Info (144001): Generated suppressed messages file C:/Users/jones/Desktop/EE316-Lab2/Lab2/output_files/Lab2.fit.smsg
 Info: Quartus II 64-Bit Fitter was successful. 0 errors, 5 warnings
-    Info: Peak virtual memory: 6196 megabytes
-    Info: Processing ended: Thu Feb 03 17:39:39 2022
+    Info: Peak virtual memory: 6181 megabytes
+    Info: Processing ended: Thu Feb 03 18:24:21 2022
     Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:12
 
