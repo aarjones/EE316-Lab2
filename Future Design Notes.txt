@@ -10,8 +10,14 @@ Address counter:
 	- Therefore need a clk_en signal whatever rate we choose.  The address_counter would have a increment_sel mux based on speed_sel to make the address change at whatever rate we want
 	- The address is the top 8 out of 32 bits, so the increment_sel mux chooses a whole number that is 1/12, 1/100, 1/200 the value of the LSB of the top bytecisc
 	
-Must write I2C controller
-Must make top_level connections (both muxes will be contained in this)
-Must finish filter
+DONE:
+Must write address_counter - Aaron
+Must finish filter --Cameron: I think this is good now.
+
+IN PROGRESS:
+Must make top_level connections (both muxes will be contained in this) - Weston
+Must write I2C controller - Aaron
+
+NOT STARTED:
 Must finish DE2_115 connections
 Debugging (obviously)
