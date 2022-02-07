@@ -19,8 +19,9 @@ end address_counter;
 architecture behavioral of address_counter is
 	signal increment_value : integer range OPERATION_SPEED/1000 to OPERATION_SPEED/60;
 	signal address_int : unsigned(31 downto 0);
+	signal 
 	
-	address_out(7 downto 0) <= address_int(31 downto 23);
+	address_out(7 downto 0) <= std_logic_vector(address_int(31 downto 23), 8);
 	
 	process(clk) 
 	begin
@@ -36,4 +37,9 @@ architecture behavioral of address_counter is
 		end if;
 	end process;
 
+	process(clk) 
+	begin
+		
+	end process;
+	
 end behavioral;
