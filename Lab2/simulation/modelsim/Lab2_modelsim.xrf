@@ -13,6 +13,7 @@ source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/LCD_Transmitter.vhd
 source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/DE2_115.vhd
 source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/top_level.vhd
 source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/address_counter.vhd
+source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_user_logic.vhd
 source_file = 1, C:/Users/jones/Desktop/EE316-Lab2/Lab2/db/Lab2.cbx.xml
 source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
 source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
