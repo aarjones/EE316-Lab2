@@ -1,0 +1,24 @@
+Second address mux:
+	- speed_sel 00 is system_controller
+	- speed_sel others is the address counter (to be written).
+
+Address counter:
+	- Must vary the increment amount based on speed_sel to get 60, 120, 1000 hz
+	- Might run at 12 KHz (could be as low as 3 KHz).  The amount it increments could be an address every 12, 100, 200 cycles (1000, 120, 60 hz)
+	- This is if the SRAM can read this quickly, which 1/80ns = 12.5 MHz so should be good
+	- Presumably the PWM device should run at this same speed?
+	- Therefore need a clk_en signal whatever rate we choose.  The address_counter would have a increment_sel mux based on speed_sel to make the address change at whatever rate we want
+	- The address is the top 8 out of 32 bits, so the increment_sel mux chooses a whole number that is 1/12, 1/100, 1/200 the value of the LSB of the top bytecisc
+	
+DONE:
+Must write address_counter - Aaron
+Must finish filter - Cameron: I (Aaron) think this is good now?
+Must write I2C controller - Aaron
+
+IN PROGRESS:
+Must make top_level connections (both muxes will be contained in this) - Weston
+
+
+NOT STARTED:
+Must finish DE2_115 connections
+Debugging (obviously)

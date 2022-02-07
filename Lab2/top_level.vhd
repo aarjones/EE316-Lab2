@@ -24,7 +24,7 @@ entity top_level is
 		scl                    : inout std_logic; --I2C clock 
 		
 		--LCD Outputs
-		lcd_data               : out   std_logic(7 downto 0);
+		lcd_data               : out   std_logic_vector(7 downto 0);
 		lcd_en                 : out   std_logic; --lcd en signal
 		lcd_rs                 : out   std_logic; --lcd rs signal
 		
@@ -35,13 +35,11 @@ entity top_level is
 		sram_oe_n              : out   std_logic;
 		sram_ce_n              : out   std_logic;
 		sram_lb_n              : out   std_logic;
-		sram_ub_n              : out   std_logic;
-		
+		sram_ub_n              : out   std_logic		
 	);	
 end top_level;
 
 architecture behavioral of top_level is
-	
 
 	--System Controller Signals
 	signal Sys_Clk : std_logic;
@@ -80,6 +78,30 @@ architecture behavioral of top_level is
 	signal Address_Master_o : std_logic_vector(7 downto 0);
 	signal Data_Master_o : std_logic_vector(7 downto 0);
 
+	component system_controller is
+		port(
+			--General Inputs
+			clk          : in    std_logic;                     --50 MHz
+			reset_h      : in    std_logic;                     --active-high reset
+			pause_btn    : in    std_logic;                     --switch between pause and test states
+			pwm_btn      : in    std_logic;                     --switch between Test and PWM
+			speed_btn    : in    std_logic;                     --change speeds
+			
+			--LCD Connections
+			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
+			byte_start   : out   integer range 0 to 94;         --starting byte
+			byte_end     : out   integer range 0 to 94;         --ending byte
+			
+			--SRAM Controller Connections
+			SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
+			data_i       : in    std_logic_vector(15 downto 0); --16-bit data
+			data_o       : out   std_logic_vector(15 downto 0); --16-bit data
+			data_select  : out   std_logic;                     --data select for multiplexor, 0 is us, 1 is ROM
+			address_out  : out   std_logic_vector(7 downto 0);  --8-bit address
+			SRAM_rw      : out   std_logic;                     --1 is read, 0 is write
+			SRAM_valid   : out   std_logic                      --is our data valid to be computed by the SRAM
+		);
+	end component;
 
 	component SRAM_Controller is
 		generic(
@@ -117,16 +139,58 @@ architecture behavioral of top_level is
 			q	      	: out std_logic_vector(15 downto 0)
 		);
 	end component;
+
+	component Reset_Delay is	
+		 port(
+			  signal iCLK : in std_logic;	
+			  signal oRESET : out std_logic
+				);	
+	end component;
 		
+
 	component LCD_User_Logic is
-		 port( iClk  : in std_logic`;                     -- 50 MHz    
-				 reset : in std_logic;
-				 Data  : out std_logic_vector (7 downto 0); -- to LCD
-			    en    : out std_logic;                     --to LCD
-			    rs    : out std_logic                      --to LCD
-		  ); 
+		port(
+			iClk          : in  std_logic;                     --50 MHz    
+			reset         : in  std_logic;
+		  
+			speed_sel     : in  std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
+		  
+			byte_start    : in  integer range 0 to 94;         --inclusive start for byteSel
+			byte_end      : in  integer range 0 to 94;         --inclusive end for byteSel
+		  
+			data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
+			address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
+
+			data          : out std_logic_vector (7 downto 0); --to LCD
+			en            : out std_logic;                     --to LCD
+			rs            : out std_logic                      --to LCD
+		); 
 	end component;
 	
+	component PWM is
+		port(
+			--INS
+			clk 		: in std_logic;
+			reset 	: in std_logic := '0';
+			clk_en 	: in std_logic;
+			value_i  : in std_logic_vector(15 downto 0);
+			
+			--OUTS
+			pwm_o		: out std_logic
+		);
+	end component;
+	
+	component HEX_to_ASCII is
+		port(
+			--IN
+			HEX_i : in std_logic_vector(3 downto 0);
+			
+			--OUT
+			ASCII_o : out std_logic_vector(7 downto 0)
+			);
+	end component;
+	
+
 	component Reset_Delay is	
 		 port(
 			  signal iCLK : in std_logic;	
@@ -258,9 +322,13 @@ begin
 	end case;
 end process;
 
-
+--SIGNALS
+signal reset_h : std_logic := '0';
+signal reset_delay_out : std_logic := '0';	
+begin
+--GENERAL CONNECTIONS
+reset_h <= not reset or reset_delay_out;
 
 --INSTANTIATIONS
---SIGNALS
 --OTHER LOGIC
 end behavioral;
