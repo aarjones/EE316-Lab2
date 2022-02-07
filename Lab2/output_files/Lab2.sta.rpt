@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for Lab2
-Thu Feb 03 18:32:49 2022
+Mon Feb 07 16:24:35 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -915,7 +915,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Thu Feb 03 18:32:41 2022
+    Info: Processing started: Mon Feb 07 16:24:26 2022
 Info: Command: quartus_sta Lab2 -c Lab2
 Info: qsta_default_script.tcl version: #1
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -963,9 +963,9 @@ Info (332140): No Minimum Pulse Width paths to report
 Info (332101): Design is fully constrained for setup requirements
 Info (332101): Design is fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4795 megabytes
-    Info: Processing ended: Thu Feb 03 18:32:49 2022
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Peak virtual memory: 4791 megabytes
+    Info: Processing ended: Mon Feb 07 16:24:35 2022
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:02
 
 
