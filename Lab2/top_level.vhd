@@ -325,7 +325,7 @@ end process;
 --SIGNALS
 signal reset_h : std_logic := '0';
 signal reset_delay_out : std_logic := '0';	
-begin
+
 --GENERAL CONNECTIONS
 reset_h <= not reset or reset_delay_out;
 
