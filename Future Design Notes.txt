@@ -15,9 +15,12 @@ Must write address_counter - Aaron
 Must finish filter - Cameron: I (Aaron) think this is good now?
 Must write I2C controller - Aaron
 Must make top_level connections (both muxes will be contained in this) - Weston & Aaron
-
-IN PROGRESS:
 Must finish DE2_115 connections - Aaron
 
-NOT STARTED:
+IN PROGRESS:
 Debugging (obviously)
+	- PWM Frequencies
+	- LCD Refresh
+	- i2c at all
+
+NOT STARTED:
