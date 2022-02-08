@@ -14,11 +14,10 @@ DONE:
 Must write address_counter - Aaron
 Must finish filter - Cameron: I (Aaron) think this is good now?
 Must write I2C controller - Aaron
+Must make top_level connections (both muxes will be contained in this) - Weston & Aaron
 
 IN PROGRESS:
-Must make top_level connections (both muxes will be contained in this) - Weston
-
+Must finish DE2_115 connections - Aaron
 
 NOT STARTED:
-Must finish DE2_115 connections
 Debugging (obviously)
