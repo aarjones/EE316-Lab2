@@ -9,10 +9,12 @@ ENTITY DE2_115 IS
 	GPIO       	: INOUT STD_LOGIC_VECTOR(35 DOWNTO 0);	-- GPIO Connection
 	
 	--LCD
+	LCD_ON      : OUT STD_LOGIC;
+	LCD_BLON    : OUT STD_LOGIC;
 	LCD_EN      : OUT STD_LOGIC;
 	LCD_RS      : OUT STD_LOGIC;
 	LCD_RW      : OUT STD_LOGIC;
-	LCD_DATA    : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+	LCD_DATA    : INOUT STD_LOGIC_VECTOR(7 DOWNTO 0);
 
 	--SRAM
 	SRAM_DQ     : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);	-- SRAM Data bus 16 Bits
@@ -68,6 +70,8 @@ end component;
 BEGIN
 
 LCD_RW <= '0'; --always writing
+LCD_BLON <= '1';
+LCD_ON <= '1';
 
 -- INSTANTIATION OF THE TOP LEVEL COMPONENT
 	Inst_top_level: top_level
@@ -77,9 +81,9 @@ LCD_RW <= '0'; --always writing
 			pause_btn => KEY(1),
 			pwm_btn => KEY(2),
 			speed_btn => KEY(3),
-			pwm_out => , --GPIO
-			sda => , --GPIO
-			scl => ,--GPIO
+			pwm_out => GPIO(2),
+			sda => GPIO(1),
+			scl => GPIO(0),
 			lcd_data => LCD_DATA, 
 			lcd_en => LCD_EN,
 			lcd_rs => LCD_RS,

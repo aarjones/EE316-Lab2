@@ -18,8 +18,8 @@ end PWM;
 architecture Behavioral of PWM is
 
 signal pwm : std_logic;
-signal counter : integer range 0 to 65535:= 0;
-
+--signal counter : integer range 0 to 65535:= 0;
+signal counter : integer range 0 to 255:= 0;
 
 begin
 
@@ -27,8 +27,8 @@ pwm_o <= pwm;
 
 PWM_Process: process(clk, clk_en, reset)
 begin
-	if (clk_en = '1' and reset = '0' and rising_edge(clk) and clk'event) then
-		if (counter >= to_integer(unsigned(value_i))) then
+	if (clk_en = '1' and reset = '0' and rising_edge(clk)) then
+		if (counter >= to_integer(unsigned(value_i(15 downto 8)))) then
 			pwm <= '0';
 			counter <= counter + 1;
 		else

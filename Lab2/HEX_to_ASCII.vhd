@@ -35,7 +35,7 @@ begin
 		when x"D" => ASCII_o <= x"44";
 		when x"E" => ASCII_o <= x"45";
 		when x"F" => ASCII_o <= x"46";
-		when others => ASCII_o <= x"0"; --Default of 0
+		when others => ASCII_o <= x"00"; --Default of 0
 	end case;
 end process;
 

@@ -63,7 +63,7 @@ architecture behavioral of i2c_user_logic is
 			clk       => clk,
 			reset_n   => reset_n,
 			ena       => i2c_enable,
-			addr      => i2c_address,
+			addr      => i2c_address(6 downto 0),
 			rw        => '0',          --we're only writing
 			data_wr   => i2c_data,
 			busy      => i2c_busy,

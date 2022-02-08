@@ -67,6 +67,7 @@ architecture behavioral of top_level is
 	signal SRAM_busy_h : std_logic;
 	signal SRAM_rw : std_logic;
 	signal SRAM_valid : std_logic;
+	signal SYS_data : std_logic_vector(15 downto 0);
 	
 	--System Signals
 	signal speed_sel : std_logic_vector(1 downto 0);
@@ -229,7 +230,7 @@ architecture behavioral of top_level is
 		port map(
 			clk => clk,
 			reset => reset_h,
-			clk_en => clk_en_op,
+			clk_en => '1',
 			value_i => data_muxed,
 			pwm_o => pwm_out 
 		);
@@ -304,7 +305,7 @@ architecture behavioral of top_level is
 			--SRAM Controller Connections
 			SRAM_busy_h => SRAM_busy_h,
 			data_i => SRAM_data,
-			data_o => open, --this should only ever be 0s or mirroring SRAM.  Therefore just ignore totally
+			data_o => SYS_data, --this should only ever be 0s or mirroring SRAM.  Therefore just ignore totally
 			data_select => data_sel,
 			address_out => system_address,
 			SRAM_rw => SRAM_rw,
@@ -417,7 +418,7 @@ architecture behavioral of top_level is
 	Mux2_Process: process(data_sel, SRAM_data, ROM_data) --DATA MUTLIPLEXOR
 	begin
 		case(data_sel) is
-			when '0' => data_muxed <= SRAM_data;
+			when '0' => data_muxed <= SYS_data;
 			when '1' => data_muxed <= ROM_data;
 		end case;
 	end process;

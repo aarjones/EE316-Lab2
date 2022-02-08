@@ -88,7 +88,7 @@ architecture behavioral of system_controller is
 						speed_sel   <= "00";                                          --ignore the speed
 						byte_start  <= 22;                                            --start at the first byte
 						byte_end    <= 47;                                            --end at byte 21
-						data_select <= '0';                                           --we are controlling the data
+						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '1';                                           --turn on the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
@@ -134,7 +134,7 @@ architecture behavioral of system_controller is
 						speed_sel   <= "01";                                          --60 Hz
 						byte_start  <= 60;                                            --start at the first byte
 						byte_end    <= 76;                                            --end at byte 21
-						data_select <= '0';                                           --we are controlling the data
+						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
@@ -151,7 +151,7 @@ architecture behavioral of system_controller is
 						speed_sel   <= "10";                                          --120 Hz
 						byte_start  <= 60;                                            --start at the first byte
 						byte_end    <= 76;                                            --end at byte 21
-						data_select <= '0';                                           --we are controlling the data
+						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
@@ -168,7 +168,7 @@ architecture behavioral of system_controller is
 						speed_sel   <= "11";                                          --1000 Hz
 						byte_start  <= 60;                                            --start at the first byte
 						byte_end    <= 76;                                            --end at byte 21
-						data_select <= '0';                                           --we are controlling the data
+						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
@@ -189,18 +189,14 @@ architecture behavioral of system_controller is
 				next_state <= init;             --move to init
 				data_o <= (others => '0');      --reset to 0s
 				address_out <= (others => '0'); --reset to 0s
-				SRAM_rw <= '1';                 --reading
+				SRAM_rw_int <= '1';                 --reading
 				SRAM_valid_int <= '0';          --reset to 0
 				ROM_cnt <= 0;                   --reset to 0
 				address_cnt <= 0;               --reset to 0
 			end if;
-		end if;
-	end process;
-	
-	process(clk, run_counter) 
-	begin
+		
 		--1 Hz clock enable
-			if clk_cnt = 50000000-1 then --for hardware
+			if clk_cnt = (50000000)-1 then --for hardware
 				clk_cnt <= 0;
 				clk_en_1 <= '1';
 			else
@@ -220,5 +216,6 @@ architecture behavioral of system_controller is
 					end if;
 				end if;
 			end if;
+		end if;
 		end process;
 end behavioral;

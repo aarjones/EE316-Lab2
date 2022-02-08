@@ -7,7 +7,7 @@ library work;
 entity address_counter is
 	generic(
 		constant BASE_AMOUNT     : integer := 16_777_215; --Bottom 24 Bits
-		constant OPERATION_SPEED : integer := 12_000;     --12 KHz
+		constant OPERATION_SPEED : integer := 195_000;     --12 KHz
 		constant CLK_SPEED       : integer := 50_000_000  --50 MHz
 	);
 	port(
@@ -20,7 +20,7 @@ entity address_counter is
 end address_counter;
 
 architecture behavioral of address_counter is
-	signal increment_value : integer range BASE_AMOUNT/1000 to BASE_AMOUNT/60;   --How much to increment the counter by
+	signal increment_value : integer range BASE_AMOUNT/(256*60) to BASE_AMOUNT * 17 / (256*60);   --How much to increment the counter by
 	signal address_int     : unsigned(31 downto 0);                              --Internal 32-bit address
 	signal clk_cnt         : integer range 0 to CLK_SPEED / OPERATION_SPEED - 1; --Count for the clk_en signal at the operation speed
 	signal clk_en_op_int   : std_logic;                                          --clk_en signal at the operation speed
@@ -28,25 +28,25 @@ architecture behavioral of address_counter is
 	begin
 	
 	clk_en_op               <= clk_en_op_int;
-	address_out(7 downto 0) <= std_logic_vector(address_int(31 downto 23));
+	address_out(7 downto 0) <= std_logic_vector(address_int(31 downto 24));
 	
 	process(clk) 
 	begin
 		case(speed_sel) is                                          --case statement determining how much to increment the address by
-			when "01" => increment_value <= BASE_AMOUNT / 60;
-			when "10" => increment_value <= BASE_AMOUNT / 120;
-			when "11" => increment_value <= BASE_AMOUNT / 1000;
+			when "01" => increment_value <= BASE_AMOUNT / (256*60) * 4.72;
+			when "10" => increment_value <= BASE_AMOUNT * 2 / (256*60) * 4.74;
+			when "11" => increment_value <= BASE_AMOUNT * 17 / (256*60) * 4.63;
 			when others => null;
 		end case;
 		
-		if rising_edge(clk) and clk_en_op_int = '1' then
+		if rising_edge(clk) then
 			address_int <= address_int + increment_value;            --increment the address at the operation speed
 		end if;
 	end process;
 
 	process(clk)                                                   --clk_en signal at the generic operation speed
 	begin
-		if clk_cnt = CLK_SPEED / OPERATION_SPEED - 1 then
+		if clk_cnt = 256*60 - 1 then
 			clk_cnt   <= 0;
 			clk_en_op_int <= '1';
 		else

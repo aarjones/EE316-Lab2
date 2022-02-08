@@ -45,9 +45,11 @@ signal currentByte_wr : std_logic_vector(7 downto 0);
 signal RS_sig : std_logic;
 signal currentRS : std_logic;
 signal byteSel : integer range 0 to 94 := 0;
-signal count : unsigned(27 DOWNTO 0):=X"000000F";
+signal count : unsigned(27 DOWNTO 0):=X"00ffffF";
 signal ena : std_logic;
 signal byte_end_int : integer range 0 to 94;
+signal reset_h_edge : std_logic;
+signal q0, q1 : std_logic;
 
 begin
 
@@ -64,6 +66,7 @@ Inst_LCD_Transmitter : LCD_Transmitter
         en => en
     );
 
+ 
 process(byteSel)
     begin
         case byteSel is
@@ -103,18 +106,18 @@ process(byteSel)
 				when 33 => currentByte <= X"C0"; RS_sig <= '0'; -- Move to second row, first char --START PAUSE
             when 34 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
             when 35 => currentByte <= X"78"; RS_sig <= '1'; -- "x"
-            when 36 => currentByte <= X""; RS_sig <= '1'; -- data left
-            when 37 => currentByte <= X""; RS_sig <= '1'; -- data left middle
-            when 38 => currentByte <= X""; RS_sig <= '1'; -- data right middle
-            when 39 => currentByte <= X""; RS_sig <= '1'; -- data right 
+            when 36 => currentByte <= data_ascii(31 downto 24); RS_sig <= '1'; -- data left
+            when 37 => currentByte <= data_ascii(23 downto 16); RS_sig <= '1'; -- data left middle
+            when 38 => currentByte <= data_ascii(15 downto 8); RS_sig <= '1'; -- data right middle
+            when 39 => currentByte <= data_ascii(7 downto 0); RS_sig <= '1'; -- data right 
 				when 40 => currentByte <= X"20"; RS_sig <= '1'; -- " "
 				when 41 => currentByte <= X"61"; RS_sig <= '1'; -- "a"
             when 42 => currentByte <= X"74"; RS_sig <= '1'; -- "t"
             when 43 => currentByte <= X"20"; RS_sig <= '1'; -- " "
             when 44 => currentByte <= X"30"; RS_sig <= '1'; -- "0"
             when 45 => currentByte <= X"78"; RS_sig <= '1'; -- "x"
-            when 46 => currentByte <= X""; RS_sig <= '1'; -- address left
-            when 47 => currentByte <= X""; RS_sig <= '1'; -- address right                    --END TEST MODE
+            when 46 => currentByte <= address_ascii(15 downto 8); RS_sig <= '1'; -- address left
+            when 47 => currentByte <= address_ascii(7 downto 0); RS_sig <= '1'; -- address right                    --END TEST MODE
 				when 48 => currentByte <= X"00"; RS_sig <= '0'; -- clear display
 				when 49 => currentByte <= X"80"; RS_sig <= '0'; -- send cursor to top row
 				when 50 => currentByte <= X"50"; RS_sig <= '1'; -- "P"  
@@ -168,7 +171,13 @@ end process;
 
 process(iClk, reset_h)
     begin
-        if(reset_h = '1') then
+		if rising_edge(iClk) then
+			q0 <= reset_h;
+			q1 <= q0;
+			reset_h_edge <= not q0 and q1;
+		end if;
+	 
+        if(reset_h_edge = '1') then
             byteSel <= 0;
 				byte_end_int <= byte_end;
         elsif(rising_edge(iClk)) then
@@ -217,6 +226,7 @@ process(iClk, reset_h)
 									byteSel      <= byte_start;
 									byte_end_int <= byte_end;
 								end if;
+								count <= X"1fffffF";
                     end if;
                     state <= start;
             end case;

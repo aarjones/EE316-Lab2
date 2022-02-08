@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Lab2
-Tue Feb 08 10:37:07 2022
+Tue Feb 08 15:52:16 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Tue Feb 08 10:37:07 2022                ;
+; Analysis & Synthesis Status        ; Failed - Tue Feb 08 15:52:16 2022                ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; Lab2                                             ;
 ; Top-level Entity Name              ; DE2_115                                          ;
@@ -163,7 +163,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Tue Feb 08 10:36:59 2022
+    Info: Processing started: Tue Feb 08 15:52:08 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Lab2 -c Lab2
 Info (11104): Parallel Compilation has detected 16 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 8 of the 8 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file btn_debounce_toggle.vhd
@@ -199,10 +199,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file lcd_use
 Info (12021): Found 2 design units, including 1 entities, in source file lcd_transmitter.vhd
     Info (12022): Found design unit 1: LCD_Transmitter-Behavioral
     Info (12023): Found entity 1: LCD_Transmitter
-Error (10500): VHDL syntax error at DE2_115.vhd(80) near text ",";  expecting "(", or an identifier, or  unary operator File: C:/Users/jones/Desktop/EE316-Lab2/Lab2/DE2_115.vhd Line: 80
-Error (10500): VHDL syntax error at DE2_115.vhd(81) near text ",";  expecting "(", or an identifier, or  unary operator File: C:/Users/jones/Desktop/EE316-Lab2/Lab2/DE2_115.vhd Line: 81
-Error (10500): VHDL syntax error at DE2_115.vhd(82) near text ",";  expecting "(", or an identifier, or  unary operator File: C:/Users/jones/Desktop/EE316-Lab2/Lab2/DE2_115.vhd Line: 82
-Info (12021): Found 0 design units, including 0 entities, in source file de2_115.vhd
+Info (12021): Found 2 design units, including 1 entities, in source file de2_115.vhd
+    Info (12022): Found design unit 1: DE2_115-structural
+    Info (12023): Found entity 1: DE2_115
 Info (12021): Found 2 design units, including 1 entities, in source file top_level.vhd
     Info (12022): Found design unit 1: top_level-behavioral
     Info (12023): Found entity 1: top_level
@@ -212,9 +211,10 @@ Info (12021): Found 2 design units, including 1 entities, in source file address
 Info (12021): Found 2 design units, including 1 entities, in source file i2c_user_logic.vhd
     Info (12022): Found design unit 1: i2c_user_logic-behavioral
     Info (12023): Found entity 1: i2c_user_logic
-Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 3 errors, 0 warnings
-    Error: Peak virtual memory: 4623 megabytes
-    Error: Processing ended: Tue Feb 08 10:37:07 2022
+Error (10327): VHDL error at address_counter.vhd(36): can't determine definition of operator ""*"" -- found 0 possible definitions File: C:/Users/jones/Desktop/EE316-Lab2/Lab2/address_counter.vhd Line: 36
+Error: Quartus II 64-Bit Analysis & Synthesis was unsuccessful. 1 error, 0 warnings
+    Error: Peak virtual memory: 4626 megabytes
+    Error: Processing ended: Tue Feb 08 15:52:16 2022
     Error: Elapsed time: 00:00:08
     Error: Total CPU time (on all processors): 00:00:01
 
