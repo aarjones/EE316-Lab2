@@ -40,69 +40,40 @@ entity top_level is
 end top_level;
 
 architecture behavioral of top_level is
-
-	--System Controller Signals
-	signal Sys_Clk : std_logic;
-	--signal Sys_Clk_En : std_logic; -> open
-	--signal Sys_KP : std_logic_vector(4 downto 0); -> open
-	signal Sys_Reset_h : std_logic;
-	signal Sys_KP_Valid : std_logic;
-	signal Sys_SRAM_busy_h : std_logic;
-	signal Sys_Mode_Led : std_logic;
-	signal Sys_Data_Select : std_logic_vector(1 downto 0);
-	signal Sys_Data_i : std_logic_vector(15 downto 0);
-	signal Sys_Data : std_logic_vector(15 downto 0);
-	signal Sys_Address : std_logic_vector(7 downto 0);
-	signal Sys_SRAM_rw : std_logic;
-	signal Sys_SRAM_Valid : std_logic;
+	--General Signals
+	signal reset_h : std_logic := '0';
+	signal reset_debounced : std_logic;
+	signal reset_delay_out : std_logic := '0';
+	signal clk_en_op : std_logic;
 	
-	--Address Counter Signals
-	signal Address_Clock : std_logic;
-	signal Address_Speed_Sel : std_logic_vector(1 downto 0);
-	--signal Address_Clock_En_Op : std_logic; -> open
-	signal Counter_Address : std_logic_vector(7 downto 0);
+	--Button Signals
+	signal pause_pulse : std_logic;
+	signal speed_pulse : std_logic;
+	signal pwm_pulse : std_logic;
 	
-	--Rom Signals
-	signal Rom_Address : std_logic_vector(7 downto 0);
-	signal Rom_Clock : std_logic;
-	signal Rom_Data : std_logic_vector(15 downto 0);
+	--Data Sgnals
+	signal data_ascii : std_logic_vector(31 downto 0);
+	signal data_muxed : std_logic_vector(15 downto 0);
+	signal ROM_data : std_logic_vector(15 downto 0);
+	signal SRAM_data : std_logic_vector(15 downto 0);
 	
-	--Debouncer SIGNALS
-	signal BTN_I : std_logic;
-	signal BTN_CLK : std_logic;
-	signal BTN_O : std_logic;
-	--signal PULSE_O : std_logic; -> open
-	signal TOGGLE_O : std_logic;
+	--Address Signals
+	signal addr_ascii : std_logic_vector(15 downto 0);
+	signal addr_muxed : std_logic_vector(7  downto 0);
+	signal system_address : std_logic_vector(7 downto 0);
+	signal counter_address : std_logic_vector(7 downto 0);
 	
-	--Master Signals
-	signal Address_Master_o : std_logic_vector(7 downto 0);
-	signal Data_Master_o : std_logic_vector(7 downto 0);
-
-	component system_controller is
-		port(
-			--General Inputs
-			clk          : in    std_logic;                     --50 MHz
-			reset_h      : in    std_logic;                     --active-high reset
-			pause_btn    : in    std_logic;                     --switch between pause and test states
-			pwm_btn      : in    std_logic;                     --switch between Test and PWM
-			speed_btn    : in    std_logic;                     --change speeds
-			
-			--LCD Connections
-			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
-			byte_start   : out   integer range 0 to 94;         --starting byte
-			byte_end     : out   integer range 0 to 94;         --ending byte
-			
-			--SRAM Controller Connections
-			SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
-			data_i       : in    std_logic_vector(15 downto 0); --16-bit data
-			data_o       : out   std_logic_vector(15 downto 0); --16-bit data
-			data_select  : out   std_logic;                     --data select for multiplexor, 0 is us, 1 is ROM
-			address_out  : out   std_logic_vector(7 downto 0);  --8-bit address
-			SRAM_rw      : out   std_logic;                     --1 is read, 0 is write
-			SRAM_valid   : out   std_logic                      --is our data valid to be computed by the SRAM
-		);
-	end component;
-
+	--SRAM Signals
+	signal SRAM_busy_h : std_logic;
+	signal SRAM_rw : std_logic;
+	signal SRAM_valid : std_logic;
+	
+	--System Signals
+	signal speed_sel : std_logic_vector(1 downto 0);
+	signal data_sel : std_logic;
+	signal byte_start : integer range 0 to 94;
+	signal byte_end : integer range 0 to 94;
+	
 	component SRAM_Controller is
 		generic(
 			IO_WIDTH 			 : integer := 16; --Width of the I/O Datapath
@@ -167,6 +138,17 @@ architecture behavioral of top_level is
 		); 
 	end component;
 	
+	component i2c_user_logic is
+		port(
+			clk      : in    std_logic;                     --clock input
+			reset_h  : in    std_logic;                     --active-high reset
+			data_hex : in    std_logic_vector(15 downto 0); --the data to display on the seven segments
+			
+			sda      : inout std_logic;                     --i2c data
+			scl      : inout std_logic                      --i2c clock
+		);
+	end component;
+	
 	component PWM is
 		port(
 			--INS
@@ -190,32 +172,6 @@ architecture behavioral of top_level is
 			);
 	end component;
 	
-
-	component Reset_Delay is	
-		 port(
-			  signal iCLK : in std_logic;	
-			  signal oRESET : out std_logic
-				);	
-	end component;
-	
-	component i2c_master is
-	  generic(
-		 input_clk : INTEGER := 100_000_000; --input clock speed from user logic in Hz
-		 bus_clk   : INTEGER := 400_000);   --speed the i2c bus (scl) will run at in Hz
-	  port(
-		 clk       : IN     STD_LOGIC;                    --system clock
-		 reset_n   : IN     STD_LOGIC;                    --active low reset
-		 ena       : IN     STD_LOGIC;                    --latch in command
-		 addr      : IN     STD_LOGIC_VECTOR(6 DOWNTO 0); --address of target slave
-		 rw        : IN     STD_LOGIC;                    --'0' is write, '1' is read
-		 data_wr   : IN     STD_LOGIC_VECTOR(7 DOWNTO 0); --data to write to slave
-		 busy      : OUT    STD_LOGIC;                    --indicates transaction in progress
-		 data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
-		 ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
-		 sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
-		 scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus
-	end component;
-	
 	component address_counter is
 		generic(
 			constant BASE_AMOUNT     : integer := 16_777_215; --Bottom 24 Bits
@@ -232,102 +188,239 @@ architecture behavioral of top_level is
 	end component;
 	
 	component system_controller is
-	port(
-		clk          : in    std_logic;                     --50 MHz
-		clk_en_200   : in    std_logic;                     --200 MHz, from keypad
-		kp_value     : in    std_logic_vector(4 downto 0);  --HEX value of the keypad
-		keypad_valid : in    std_logic;                     --is the keypad value valid?
-		reset_h      : in    std_logic;                     --active-high reset
-		SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
-
-		mode_LED     : out   std_logic;                     --1 in operation, 0 in programming
-		data_select  : out   std_logic_vector(1 downto 0);  --1 is ROM, 0 is manual
-		data_i       : in    std_logic_vector(15 downto 0); --16-bit data
-		data_o       : out   std_logic_vector(15 downto 0); --16-bit data
-		address_out  : out   std_logic_vector(7 downto 0);  --8-bit address
-		SRAM_rw      : out   std_logic;                     --1 is read, 0 is write
-		SRAM_valid   : out   std_logic                      --is our data valid to be computed by the SRAM
-	);
+		port(
+			--General Inputs
+			clk          : in    std_logic;                     --50 MHz
+			reset_h      : in    std_logic;                     --active-high reset
+			pause_btn    : in    std_logic;                     --switch between pause and test states
+			pwm_btn      : in    std_logic;                     --switch between Test and PWM
+			speed_btn    : in    std_logic;                     --change speeds
+			
+			--LCD Connections
+			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
+			byte_start   : out   integer range 0 to 94;         --starting byte
+			byte_end     : out   integer range 0 to 94;         --ending byte
+			
+			--SRAM Controller Connections
+			SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
+			data_i       : in    std_logic_vector(15 downto 0); --16-bit data
+			data_o       : out   std_logic_vector(15 downto 0); --16-bit data
+			data_select  : out   std_logic;                     --data select for multiplexor, 0 is us, 1 is ROM
+			address_out  : out   std_logic_vector(7 downto 0);  --8-bit address
+			SRAM_rw      : out   std_logic;                     --1 is read, 0 is write
+			SRAM_valid   : out   std_logic                      --is our data valid to be computed by the SRAM
+		);	
 	end component;
 	
 	component btn_debounce_toggle is
 		GENERIC (
 			CONSTANT CNTR_MAX : std_logic_vector(15 downto 0) := X"FFFF");
-		Port (	BTN_I 	 : in  STD_LOGIC;
-				CLK 	 : in  STD_LOGIC;
-				BTN_O 	 : out  STD_LOGIC;
-				pulse_O  : out std_logic;
-				TOGGLE_O : out  STD_LOGIC);
+		Port (
+			BTN_I 	: in  STD_LOGIC;
+			CLK 	   : in  STD_LOGIC;
+			BTN_O 	: out  STD_LOGIC;
+			pulse_O  : out std_logic;
+			TOGGLE_O : out  STD_LOGIC);
 	end component;
 		
-begin
+	begin
 
---INSTANTIATIONS
-Inst_System_Controller: system_controller
-	port map(
-		clk			=> Sys_Clk,
-		clk_en_200	=> open,
-		kp_value	=> open,
-		keypad_valid => Sys_KP_Valid,
-		reset_h		=> Sys_Reset_h,
-		SRAM_busy_h => Sys_SRAM_busy_h,
-		mode_LED	=> Sys_Mode_Led,
-		data_select	=> Sys_Data_Select,
-		data_i		=> Sys_Data_i,
-		data_o		=> Sys_Data,
-		address_out	=> Sys_Address, 
-		SRAM_rw		=> Sys_SRAM_rw,
-		SRAM_valid 	=> Sys_SRAM_Valid
-	);
+	Inst_PWM: PWM
+		port map(
+			clk => clk,
+			reset => reset_h,
+			clk_en => clk_en_op,
+			value_i => data_muxed,
+			pwm_o => pwm_out 
+		);
+		
+	Inst_HEX_to_ASCII_0: HEX_to_ASCII
+		port map(
+			HEX_i => data_muxed(3 downto 0),
+			ASCII_o => data_ascii(7 downto 0)
+		);
+		
+	Inst_HEX_to_ASCII_1: HEX_to_ASCII
+		port map(
+			HEX_i => data_muxed(7 downto 4),
+			ASCII_o => data_ascii(15 downto 8)
+		);
+		
+	Inst_HEX_to_ASCII_2: HEX_to_ASCII
+		port map(
+			HEX_i => data_muxed(11 downto 8),
+			ASCII_o => data_ascii(23 downto 16)
+		);
+		
+	Inst_HEX_to_ASCII_3: HEX_to_ASCII
+		port map(
+			HEX_i => data_muxed(15 downto 12),
+			ASCII_o => data_ascii(31 downto 24)
+		);
+		
+	Inst_HEX_to_ASCII_4: HEX_to_ASCII
+		port map(
+			HEX_i => addr_muxed(3 downto 0),
+			ASCII_o => addr_ascii(7 downto 0)
+		);
+		
+	Inst_HEX_to_ASCII_5: HEX_to_ASCII
+		port map(
+			HEX_i => addr_muxed(7 downto 4),
+			ASCII_o => addr_ascii(15 downto 8)
+		);
+		
+	Inst_LCD_User_Logic: LCD_User_Logic
+		port map( 
+			iClk => clk,
+			reset => reset_h,
+		  
+			speed_sel => speed_sel,
+		  
+			byte_start => byte_start,
+			byte_end => byte_end,
+		  
+			data_ascii => data_ascii,
+			address_ascii => addr_ascii,
 
-Inst_Address_Counter: address_counter
-	port map(
-		clk			=> Address_Clock,
-		speed_sel	=> Address_Speed_Sel,
-		clk_en_op	=> open,
-		address_out	=> Counter_Address
-	);
+			data => lcd_data,
+			en => lcd_en,
+			rs => lcd_rs
+		);
+		
+	Inst_system_controller: system_controller
+		port map(
+			clk => clk,
+			reset_h => reset_h,
+			pause_btn => pause_pulse,
+			pwm_btn => pwm_pulse,
+			speed_btn => speed_pulse,
+			
+			--LCD Connections
+			speed_sel => speed_sel,
+			byte_start => byte_start,
+			byte_end => byte_end,
+			
+			--SRAM Controller Connections
+			SRAM_busy_h => SRAM_busy_h,
+			data_i => SRAM_data,
+			data_o => open, --this should only ever be 0s or mirroring SRAM.  Therefore just ignore totally
+			data_select => data_sel,
+			address_out => system_address,
+			SRAM_rw => SRAM_rw,
+			SRAM_valid => SRAM_valid
+		);
+		
+	Inst_i2c_user_logic: i2c_user_logic
+		port map(
+			clk => clk,
+			reset_h => reset_h,
+			data_hex => data_muxed,
+			
+			sda => sda,
+			scl => scl
+		);
+		
+	Inst_SRAM_Controller: SRAM_Controller
+		port map(
+			--Controller to Rest of System
+			cont_i => data_muxed,
+			cont_o => SRAM_data,
+			cont_address => addr_muxed,
+			cont_rw => SRAM_rw,
+			cont_data_valid => SRAM_valid,
+			
+			--Controller outputs to SRAM
+			sram_io => sram_io,
+			sram_address => sram_address,
+			sram_we_n => sram_we_n,
+			sram_oe_n => sram_oe_n,
+			sram_ub_n => sram_ub_n,
+			sram_lb_n => sram_lb_n,
+			sram_ce_n => sram_ce_n,
+			
+			--General
+			clk => clk,
+			reset_h => reset_h,
+			busy_h => SRAM_busy_h
+		);
 	
-Inst_ROM1_Port: ROM1Port
-	port map(
-		address		=> Rom_Address,
-		clock		=> Rom_Clock,
-		q			=> Rom_Data
-	);
+	Inst_Address_Counter: address_counter
+		port map(
+			clk => clk,
+			speed_sel => speed_sel,
+			clk_en_op => clk_en_op,
+			address_out	=> counter_address
+		);
+		
+	Inst_ROM1_Port: ROM1Port
+		port map(
+			address => addr_muxed,
+			clock => clk,
+			q => ROM_data
+		);
 
-Inst_BTN_Debounce: btn_debounce_toggle
-	port map(
-		BTN_I => open,
-		CLK		=> BTN_CLK,
-		BTN_O	=> BTN_O,
-		PULSE_O	=> open,
-		TOGGLE_O => TOGGLE_O
-	);
+	Inst_BTN_Debounce_reset: btn_debounce_toggle
+		port map(
+			BTN_I => reset,
+			CLK => clk,
+			BTN_O	=> reset_debounced,
+			PULSE_O => open,
+			TOGGLE_O => open
+		);
+		
+	Inst_BTN_Debounce_pause: btn_debounce_toggle
+		port map(
+			BTN_I => pause_btn,
+			CLK => clk,
+			BTN_O	=> open,
+			PULSE_O => pause_pulse,
+			TOGGLE_O => open
+		);
+		
+	Inst_BTN_Debounce_speed: btn_debounce_toggle
+		port map(
+			BTN_I => speed_btn,
+			CLK => clk,
+			BTN_O	=> open,
+			PULSE_O => speed_pulse,
+			TOGGLE_O => open
+		);
+		
+	Inst_BTN_Debounce_pwm: btn_debounce_toggle
+		port map(
+			BTN_I => pwm_btn,
+			CLK => clk,
+			BTN_O	=> open,
+			PULSE_O => pwm_pulse,
+			TOGGLE_O => open
+		);
+		
+	Inst_Reset_Delay : Reset_Delay
+		port map(
+			iCLK => clk,
+			oRESET => reset_delay_out
+		);
 	
---PROCESSES
+	--GENERAL CONNECTIONS
+	reset_h <= not reset_debounced or reset_delay_out;
+		
+	--PROCESSES
+	Mux1_Process: process(speed_sel, system_address, counter_address) --ADDRESS MULTIPLEXOR
+	begin
+		case(speed_sel) is
+			when "00"   => addr_muxed <= system_address;
+			when others => addr_muxed <= counter_address;
+		end case;
+	end process;
 
-Mux1_Process: process(Address_Speed_Sel, Sys_Address, Counter_Address)
-begin
-	case(Address_Speed_Sel) is
-		when "00" => Address_Master_o <= Sys_Address;
-		when others => Address_Master_o <= Counter_Address;
-	end case;
-end process;
-
-Mux2_Process: process(Sys_Data_Select, Sys_Data, Rom_Data)
-begin
-	case (Sys_Data_Select) is
-		when '0' => Data_Master_o <= Sys_Data;
-		when others => Data_Master_o <= Rom_Data;
-	end case;
-end process;
-
---SIGNALS
-signal reset_h : std_logic := '0';
-signal reset_delay_out : std_logic := '0';	
-
---GENERAL CONNECTIONS
-reset_h <= not reset or reset_delay_out;
+	Mux2_Process: process(data_sel, SRAM_data, ROM_data) --DATA MUTLIPLEXOR
+	begin
+		case(data_sel) is
+			when '0' => data_muxed <= SRAM_data;
+			when '1' => data_muxed <= ROM_data;
+		end case;
+	end process;
 
 --INSTANTIATIONS
 --OTHER LOGIC
