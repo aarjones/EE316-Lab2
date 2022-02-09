@@ -13,8 +13,9 @@ entity system_controller is
 		
 		--LCD Connections
 		speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
-		byte_start   : out   integer range 0 to 94;         --starting byte
-		byte_end     : out   integer range 0 to 94;         --ending byte
+		byte_start   : out   integer range 0 to 109;        --starting byte
+		byte_end     : out   integer range 0 to 109;        --ending byte
+		LCD_en       : out   std_logic;                     --a pulse to write to the LCD
 		
 		--SRAM Controller Connections
 		SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
@@ -41,6 +42,8 @@ architecture behavioral of system_controller is
 	--Internal Versions
 	signal SRAM_rw_int       : std_logic                     := '0'; --0 is write, 1 is read
 	signal SRAM_valid_int    : std_logic;                            --Should the SRAM_Controller begin
+	signal LCD_en_int        : std_logic;                            --should we refresh the LCD, combined with clk_en_1
+	signal refresh_LCD       : std_logic;                            --should we refresh the LCD (on mode change)
 	
 	--For 1 Hz 
 	signal clk_cnt : integer range 0 to 50000000-1;                  --Counter for the clk_en at 1 hz
@@ -52,6 +55,8 @@ architecture behavioral of system_controller is
 	state <= next_state;
 	SRAM_rw <= SRAM_rw_int;
 	SRAM_valid <= SRAM_valid_int;
+	LCD_en_int <= clk_en_1 or refresh_LCD;
+	LCD_en <= LCD_en_int;
 	
 	--Process for state machine
 	process(clk) begin
@@ -71,7 +76,6 @@ architecture behavioral of system_controller is
 								ROM_cnt <= ROM_cnt + 1;
 								to_increment <= '0';
 							end if;
-							
 						elsif SRAM_valid_int = '1' then
 								SRAM_valid_int <= '0';                                  --take valid back low
 								to_increment <= '1';                                    --prepare for next count
@@ -79,10 +83,14 @@ architecture behavioral of system_controller is
 						if ROM_cnt = 256 then                                         --if we've reached the end
 							ROM_cnt     <= 0;
 							next_state  <= test;                                       --move to the next state
+							refresh_LCD <= '1';
 							SRAM_rw_int <= '1';
 							address_cnt <= 0;
 							data_o   <= (others => '0');
 						end if;	
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
+						end if;
 						
 					when test =>
 						speed_sel   <= "00";                                          --ignore the speed
@@ -102,15 +110,20 @@ architecture behavioral of system_controller is
 						end if;
 						if pause_btn = '1' then                                       --if the pause button was pressed
 							next_state <= pause;                                       --move to pause
+							refresh_LCD <= '1';
 						elsif pwm_btn = '1' then                                      --otherwise if the pwm button was pressed
 							next_state <= pwm60;                                       --move to pwm, 60 hz
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the count
+						end if;
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
 						end if;
 						
 					when pause =>
 						speed_sel   <= "00";                                          --ignore the speed
-						byte_start  <= 33;                                            --start at the first byte
-						byte_end    <= 59;                                            --end at byte 21
+						byte_start  <= 48;                                            --start at the first byte
+						byte_end    <= 74;                                            --end at byte 21
 						data_select <= '0';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
@@ -125,15 +138,20 @@ architecture behavioral of system_controller is
 						end if;
 						if pause_btn = '1' then                                       --if the pause button was pressed
 							next_state <= test;                                        --move to test
+							refresh_LCD <= '1';
 						elsif pwm_btn = '1' then                                      --otherwise if the pwm button was pressed
 							next_state <= pwm60;                                       --move to pwm, 60 hz
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the count
+						end if;
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
 						end if;
 						
 					when pwm60 =>
 						speed_sel   <= "01";                                          --60 Hz
-						byte_start  <= 60;                                            --start at the first byte
-						byte_end    <= 76;                                            --end at byte 21
+						byte_start  <= 75;                                            --start at the first byte
+						byte_end    <= 96;                                            --end at byte 21
 						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
@@ -141,16 +159,21 @@ architecture behavioral of system_controller is
 						data_o      <= data_i;                                        --data_o is same as SRAM
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm120;                                      --do it
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
 						elsif pwm_btn = '1' then                                      --otherwise, if we need to go back to the test mode
 							next_state <= test;                                        --do it
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
+						end if;
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
 						end if;
 						
 					when pwm120 =>
 						speed_sel   <= "10";                                          --120 Hz
-						byte_start  <= 60;                                            --start at the first byte
-						byte_end    <= 76;                                            --end at byte 21
+						byte_start  <= 75;                                            --start at the first byte
+						byte_end    <= 91;                                            --end at byte 21
 						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
@@ -158,16 +181,21 @@ architecture behavioral of system_controller is
 						data_o      <= data_i;                                        --data_o is same as SRAM
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm1000;                                     --do it
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
 						elsif pwm_btn = '1' then                                      --otherwise, if we need to go back to the test mode
 							next_state <= test;                                        --do it
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
+						end if;
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
 						end if;
 					
 					when pwm1000 =>
 						speed_sel   <= "11";                                          --1000 Hz
-						byte_start  <= 60;                                            --start at the first byte
-						byte_end    <= 76;                                            --end at byte 21
+						byte_start  <= 75;                                            --start at the first byte
+						byte_end    <= 91;                                            --end at byte 21
 						data_select <= '1';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
@@ -175,14 +203,20 @@ architecture behavioral of system_controller is
 						data_o      <= data_i;                                        --data_o is same as SRAM
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm60;                                       --do it
+							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
 						elsif pwm_btn = '1' then                                      --otherwise, if we need to go back to the test mode
+							refresh_LCD <= '1';
 							next_state <= test;                                        --do it
 							address_cnt <= 0;                                          --and reset the address
+						end if;
+						if refresh_LCD = '1' then
+							refresh_LCD <= '0';
 						end if;
 						
 				end case;
 			elsif reset_h = '1' then
+				refresh_LCD <= '1';
 				speed_sel   <= "00";            --ignore the speed
 				byte_start  <= 0;               --start at the first byte
 				byte_end    <= 21;              --end at byte 21
@@ -196,7 +230,7 @@ architecture behavioral of system_controller is
 			end if;
 		
 		--1 Hz clock enable
-			if clk_cnt = (50000000)-1 then --for hardware
+			if clk_cnt = (50000000)-1 and run_counter = '1' then --for hardware
 				clk_cnt <= 0;
 				clk_en_1 <= '1';
 			else

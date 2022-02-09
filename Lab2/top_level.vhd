@@ -72,8 +72,9 @@ architecture behavioral of top_level is
 	--System Signals
 	signal speed_sel : std_logic_vector(1 downto 0);
 	signal data_sel : std_logic;
-	signal byte_start : integer range 0 to 94;
-	signal byte_end : integer range 0 to 94;
+	signal byte_start : integer range 0 to 109;
+	signal byte_end : integer range 0 to 109;
+	signal LCD_en : std_logic;
 	
 	component SRAM_Controller is
 		generic(
@@ -124,11 +125,12 @@ architecture behavioral of top_level is
 		port(
 			iClk          : in  std_logic;                     --50 MHz    
 			reset         : in  std_logic;
+			en            : in  std_logic;                     --a pulse to make the system write to the LCD
 		  
 			speed_sel     : in  std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
 		  
-			byte_start    : in  integer range 0 to 94;         --inclusive start for byteSel
-			byte_end      : in  integer range 0 to 94;         --inclusive end for byteSel
+			byte_start    : in  integer range 0 to 109;         --inclusive start for byteSel
+			byte_end      : in  integer range 0 to 109;         --inclusive end for byteSel
 		  
 			data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
 			address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
@@ -199,8 +201,9 @@ architecture behavioral of top_level is
 			
 			--LCD Connections
 			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
-			byte_start   : out   integer range 0 to 94;         --starting byte
-			byte_end     : out   integer range 0 to 94;         --ending byte
+			byte_start   : out   integer range 0 to 109;        --starting byte
+			byte_end     : out   integer range 0 to 109;        --ending byte
+			LCD_en       : out   std_logic;                     --a pulse to write to the LCD
 			
 			--SRAM Controller Connections
 			SRAM_busy_h  : in    std_logic;                     --is the SRAM controller busy?
@@ -275,6 +278,7 @@ architecture behavioral of top_level is
 		port map( 
 			iClk => clk,
 			reset => reset_h,
+			en => LCD_en,
 		  
 			speed_sel => speed_sel,
 		  

@@ -20,7 +20,18 @@ Must finish DE2_115 connections - Aaron
 IN PROGRESS:
 Debugging (obviously)
 	- PWM Frequencies
+	- PWM on/off: abuse the clk_en pin
 	- LCD Refresh
 	- i2c at all
+	
+Redesign of LCD_user logic:
+	- Make an en pulse to start the transmission.  This builds in the pause to the system_controller so things refresh exactly when needed.
+		- system_controller needs to be updated to send this pulse--OR clk_en_1 and an internal signal.  This allows us to force the refresh when modes are changed, etc.
+	- Init:  bytes 0 - 21
+	- Test:  bytes 22 - 47
+	- Pause: bytes 48 - 74
+	- PWM60: bytes 75 - 96
+	- PWM12: Bytes 75 - 91; 97 - 102
+	- PWM10: Bytes 75 - 91; 103 - 109
 
 NOT STARTED:
