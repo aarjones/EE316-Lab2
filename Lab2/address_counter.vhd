@@ -33,9 +33,9 @@ architecture behavioral of address_counter is
 	process(clk) 
 	begin
 		case(speed_sel) is                                          --case statement determining how much to increment the address by
-			when "01" => increment_value <= BASE_AMOUNT / (256*60) * 4.72;
-			when "10" => increment_value <= BASE_AMOUNT * 2 / (256*60) * 4.74;
-			when "11" => increment_value <= BASE_AMOUNT * 17 / (256*60) * 4.63;
+			when "01" => increment_value <= 60   / CLK_SPEED * 0xFFFF_FFFF; --increment = (f_out/f_clk) * 2^32
+			when "10" => increment_value <= 120  / CLK_SPEED * 0xFFFF_FFFF;
+			when "11" => increment_value <= 1000 / CLK_SPEED * 0xFFFF_FFFF;
 			when others => null;
 		end case;
 		
