@@ -29,10 +29,10 @@ Debugging:
 	- PWM Frequencies - hopefully good
 	- PWM on/off: abuse the clk_en pin
 	- LCD Refresh - fix when under reset
+	- Make it run off of the SRAM again
 
 IN PROGRESS:
 Debugging (obviously)
 	- i2c at all
-	- Make it run off of the SRAM again
 
 NOT STARTED:

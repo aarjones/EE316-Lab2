@@ -435,7 +435,7 @@ architecture behavioral of top_level is
 	Mux2_Process: process(data_sel, SRAM_data, ROM_data) --DATA MUTLIPLEXOR
 	begin
 		case(data_sel) is
-			when '0' => data_muxed <= SYS_data;
+			when '0' => data_muxed <= SRAM_data;
 			when '1' => data_muxed <= ROM_data;
 		end case;
 	end process;

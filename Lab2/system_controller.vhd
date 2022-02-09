@@ -75,7 +75,7 @@ architecture behavioral of system_controller is
 						byte_start  <= 8;                                             --start at the first byte
 						byte_end    <= 21;                                            --end at byte 21
 						SRAM_rw_int <= '0';                                           --we're writing
-						data_select <= '0';                                           --reading from ROM
+						data_select <= '1';                                           --reading from ROM
 						address_out <= std_logic_vector(to_unsigned(ROM_cnt, 8));     --convert the ROM_cnt to address
 						if SRAM_busy_h = '0' then                                     --if the controller is ready
 							SRAM_valid_int <= '1';                                     --take in the next value
@@ -104,7 +104,7 @@ architecture behavioral of system_controller is
 						speed_sel   <= "00";                                          --ignore the speed
 						byte_start  <= 22;                                            --start at the first byte
 						byte_end    <= 47;                                            --end at byte 21
-						data_select <= '1';                                           --we are controlling the data
+						data_select <= '0';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '1';                                           --turn on the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
@@ -162,11 +162,16 @@ architecture behavioral of system_controller is
 						speed_sel   <= "01";                                          --60 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 96;                                            --end at byte 21
-						data_select <= '1';                                           --we are controlling the data
+						data_select <= '0';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
 						data_o      <= data_i;                                        --data_o is same as SRAM
+						if SRAM_busy_h = '0' then                                     --if the controller is ready
+							SRAM_valid_int <= '1';                                     --take in the next value
+						elsif SRAM_valid_int = '1' then
+								SRAM_valid_int <= '0';                                  --take valid back low
+						end if;
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm120;                                      --do it
 							refresh_LCD <= '1';
@@ -185,11 +190,16 @@ architecture behavioral of system_controller is
 						speed_sel   <= "10";                                          --120 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 91;                                            --end at byte 21
-						data_select <= '1';                                           --we are controlling the data
+						data_select <= '0';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
 						data_o      <= data_i;                                        --data_o is same as SRAM
+						if SRAM_busy_h = '0' then                                     --if the controller is ready
+							SRAM_valid_int <= '1';                                     --take in the next value
+						elsif SRAM_valid_int = '1' then
+								SRAM_valid_int <= '0';                                  --take valid back low
+						end if;
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm1000;                                     --do it
 							refresh_LCD <= '1';
@@ -208,11 +218,16 @@ architecture behavioral of system_controller is
 						speed_sel   <= "11";                                          --1000 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 91;                                            --end at byte 21
-						data_select <= '1';                                           --we are controlling the data
+						data_select <= '0';                                           --we are controlling the data
 						SRAM_rw_int <= '1';                                           --we are reading
 						run_counter <= '0';                                           --turn off the counter
 						address_out <= std_logic_vector(to_unsigned(address_cnt, 8)); --output address to displays
 						data_o      <= data_i;                                        --data_o is same as SRAM
+						if SRAM_busy_h = '0' then                                     --if the controller is ready
+							SRAM_valid_int <= '1';                                     --take in the next value
+						elsif SRAM_valid_int = '1' then
+								SRAM_valid_int <= '0';                                  --take valid back low
+						end if;
 						if speed_btn = '1' then                                       --if we need to change speeds
 							next_state <= pwm60;                                       --do it
 							refresh_LCD <= '1';
