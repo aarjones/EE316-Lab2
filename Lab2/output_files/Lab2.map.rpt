@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Lab2
-Wed Feb 09 12:46:27 2022
+Wed Feb 09 16:20:04 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -21,30 +21,31 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Ver
  13. State Machine - |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|next_state
  14. State Machine - |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state
  15. State Machine - |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|LCD_Transmitter:Inst_LCD_Transmitter|state
- 16. Registers Removed During Synthesis
- 17. Removed Registers Triggering Further Register Optimizations
- 18. General Register Statistics
- 19. Inverted Register Statistics
- 20. Multiplexer Restructuring Statistics (Restructuring Performed)
- 21. Source assignments for top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component|altsyncram_u291:auto_generated
- 22. Parameter Settings for User Entity Instance: top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master
- 23. Parameter Settings for User Entity Instance: top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller
- 24. Parameter Settings for User Entity Instance: top_level:Inst_top_level|address_counter:Inst_Address_Counter
- 25. Parameter Settings for User Entity Instance: top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component
- 26. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset
- 27. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause
- 28. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed
- 29. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm
- 30. altsyncram Parameter Settings by Entity Instance
- 31. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm"
- 32. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed"
- 33. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause"
- 34. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset"
- 35. Port Connectivity Checks: "top_level:Inst_top_level|address_counter:Inst_Address_Counter"
- 36. Port Connectivity Checks: "top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master"
- 37. Port Connectivity Checks: "top_level:Inst_top_level|PWM:Inst_PWM"
- 38. Elapsed Time Per Partition
- 39. Analysis & Synthesis Messages
+ 16. User-Specified and Inferred Latches
+ 17. Registers Removed During Synthesis
+ 18. Removed Registers Triggering Further Register Optimizations
+ 19. General Register Statistics
+ 20. Inverted Register Statistics
+ 21. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 22. Source assignments for top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component|altsyncram_u291:auto_generated
+ 23. Parameter Settings for User Entity Instance: top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master
+ 24. Parameter Settings for User Entity Instance: top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller
+ 25. Parameter Settings for User Entity Instance: top_level:Inst_top_level|address_counter:Inst_Address_Counter
+ 26. Parameter Settings for User Entity Instance: top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component
+ 27. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset
+ 28. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause
+ 29. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed
+ 30. Parameter Settings for User Entity Instance: top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm
+ 31. altsyncram Parameter Settings by Entity Instance
+ 32. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm"
+ 33. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed"
+ 34. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause"
+ 35. Port Connectivity Checks: "top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset"
+ 36. Port Connectivity Checks: "top_level:Inst_top_level|address_counter:Inst_Address_Counter"
+ 37. Port Connectivity Checks: "top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master"
+ 38. Port Connectivity Checks: "top_level:Inst_top_level|PWM:Inst_PWM"
+ 39. Elapsed Time Per Partition
+ 40. Analysis & Synthesis Messages
 
 
 
@@ -70,15 +71,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Feb 09 12:46:27 2022            ;
+; Analysis & Synthesis Status        ; Successful - Wed Feb 09 16:20:04 2022            ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; Lab2                                             ;
 ; Top-level Entity Name              ; DE2_115                                          ;
 ; Family                             ; Cyclone IV E                                     ;
-; Total logic elements               ; 733                                              ;
-;     Total combinational functions  ; 703                                              ;
-;     Dedicated logic registers      ; 362                                              ;
-; Total registers                    ; 362                                              ;
+; Total logic elements               ; 787                                              ;
+;     Total combinational functions  ; 757                                              ;
+;     Dedicated logic registers      ; 396                                              ;
+; Total registers                    ; 396                                              ;
 ; Total pins                         ; 95                                               ;
 ; Total virtual pins                 ; 0                                                ;
 ; Total memory bits                  ; 4,096                                            ;
@@ -230,28 +231,28 @@ applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 733            ;
+; Estimated Total logic elements              ; 787            ;
 ;                                             ;                ;
-; Total combinational functions               ; 703            ;
+; Total combinational functions               ; 757            ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 271            ;
-;     -- 3 input functions                    ; 145            ;
-;     -- <=2 input functions                  ; 287            ;
+;     -- 4 input functions                    ; 292            ;
+;     -- 3 input functions                    ; 161            ;
+;     -- <=2 input functions                  ; 304            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 509            ;
-;     -- arithmetic mode                      ; 194            ;
+;     -- normal mode                          ; 532            ;
+;     -- arithmetic mode                      ; 225            ;
 ;                                             ;                ;
-; Total registers                             ; 362            ;
-;     -- Dedicated logic registers            ; 362            ;
+; Total registers                             ; 396            ;
+;     -- Dedicated logic registers            ; 396            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 95             ;
 ; Total memory bits                           ; 4096           ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 378            ;
-; Total fan-out                               ; 3501           ;
+; Maximum fan-out                             ; 412            ;
+; Total fan-out                               ; 3734           ;
 ; Average fan-out                             ; 2.63           ;
 +---------------------------------------------+----------------+
 
@@ -261,15 +262,15 @@ applicable agreement for further details.
 +-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                          ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                      ; Library Name ;
 +-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_115                                            ; 703 (0)           ; 362 (0)      ; 4096        ; 0            ; 0       ; 0         ; 95   ; 0            ; |DE2_115                                                                                                                 ; work         ;
-;    |top_level:Inst_top_level|                       ; 703 (26)          ; 362 (0)      ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level                                                                                        ; work         ;
+; |DE2_115                                            ; 757 (0)           ; 396 (0)      ; 4096        ; 0            ; 0       ; 0         ; 95   ; 0            ; |DE2_115                                                                                                                 ; work         ;
+;    |top_level:Inst_top_level|                       ; 757 (26)          ; 396 (0)      ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level                                                                                        ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_0|            ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_0                                                       ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_1|            ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_1                                                       ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_2|            ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_2                                                       ; work         ;
-;       |HEX_to_ASCII:Inst_HEX_to_ASCII_3|            ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_3                                                       ; work         ;
-;       |HEX_to_ASCII:Inst_HEX_to_ASCII_4|            ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_4                                                       ; work         ;
-;       |HEX_to_ASCII:Inst_HEX_to_ASCII_5|            ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_5                                                       ; work         ;
-;       |LCD_User_Logic:Inst_LCD_User_Logic|          ; 306 (272)         ; 82 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic                                                     ; work         ;
+;       |HEX_to_ASCII:Inst_HEX_to_ASCII_3|            ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_3                                                       ; work         ;
+;       |HEX_to_ASCII:Inst_HEX_to_ASCII_4|            ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_4                                                       ; work         ;
+;       |HEX_to_ASCII:Inst_HEX_to_ASCII_5|            ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_5                                                       ; work         ;
+;       |LCD_User_Logic:Inst_LCD_User_Logic|          ; 315 (281)         ; 82 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic                                                     ; work         ;
 ;          |LCD_Transmitter:Inst_LCD_Transmitter|     ; 34 (34)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|LCD_Transmitter:Inst_LCD_Transmitter                ; work         ;
 ;       |PWM:Inst_PWM|                                ; 16 (16)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|PWM:Inst_PWM                                                                           ; work         ;
 ;       |ROM1Port:Inst_ROM1_Port|                     ; 0 (0)             ; 0 (0)        ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port                                                                ; work         ;
@@ -277,13 +278,14 @@ applicable agreement for further details.
 ;             |altsyncram_u291:auto_generated|        ; 0 (0)             ; 0 (0)        ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component|altsyncram_u291:auto_generated ; work         ;
 ;       |Reset_Delay:Inst_Reset_Delay|                ; 27 (27)           ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|Reset_Delay:Inst_Reset_Delay                                                           ; work         ;
 ;       |SRAM_Controller:Inst_SRAM_Controller|        ; 32 (32)           ; 67 (67)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller                                                   ; work         ;
+;       |address_counter:Inst_Address_Counter|        ; 38 (38)           ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|address_counter:Inst_Address_Counter                                                   ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_pause| ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause                                            ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_pwm|   ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm                                              ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_reset| ; 23 (23)           ; 17 (17)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset                                            ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_speed| ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed                                            ; work         ;
 ;       |i2c_user_logic:Inst_i2c_user_logic|          ; 30 (0)            ; 12 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic                                                     ; work         ;
 ;          |i2c_master:Inst_i2c_master|               ; 30 (30)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master                          ; work         ;
-;       |system_controller:Inst_system_controller|    ; 141 (141)         ; 94 (94)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller                                               ; work         ;
+;       |system_controller:Inst_system_controller|    ; 146 (146)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller                                               ; work         ;
 +-----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -394,6 +396,31 @@ Encoding Type:  One-Hot
 +------------+-----------+------------+-------------------------------------------------------------------------------------------+
 
 
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                                        ;
++-----------------------------------------------------------------------------------+-------------------------------+------------------------+
+; Latch Name                                                                        ; Latch Enable Signal           ; Free of Timing Hazards ;
++-----------------------------------------------------------------------------------+-------------------------------+------------------------+
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[14] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[13] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[12] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[11] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[10] ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[9]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[8]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[7]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[6]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[5]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[3]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[2]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[1]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[0]  ; top_level:Inst_top_level|Mux7 ; yes                    ;
+; Number of user-specified and inferred latches = 15                                ;                               ;                        ;
++-----------------------------------------------------------------------------------+-------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Registers Removed During Synthesis                                                                                                                                                                                     ;
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -407,7 +434,6 @@ Encoding Type:  One-Hot
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[2..4]   ; Merged with top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[0] ;
 ; top_level:Inst_top_level|system_controller:Inst_system_controller|byte_end[3]                          ; Merged with top_level:Inst_top_level|system_controller:Inst_system_controller|byte_end[1]                     ;
 ; top_level:Inst_top_level|system_controller:Inst_system_controller|byte_start[3,6]                      ; Merged with top_level:Inst_top_level|system_controller:Inst_system_controller|byte_start[0]                   ;
-; top_level:Inst_top_level|address_counter:Inst_Address_Counter|address_int[0..31]                       ; Stuck at GND due to stuck port data_in                                                                        ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[4,5]    ; Merged with top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[6] ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[0]      ; Stuck at GND due to stuck port data_in                                                                        ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[1]      ; Stuck at VCC due to stuck port data_in                                                                        ;
@@ -436,41 +462,41 @@ Encoding Type:  One-Hot
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.slv_ack2  ; Stuck at GND due to stuck port data_in                                                                        ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.stop      ; Stuck at GND due to stuck port data_in                                                                        ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.ready     ; Stuck at GND due to stuck port data_in                                                                        ;
-; Total Number of Removed Registers = 93                                                                 ;                                                                                                               ;
+; Total Number of Removed Registers = 61                                                                 ;                                                                                                               ;
 +--------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                    ;
-+------------------------------------------------------------------------------------------------------+--------------------------------+--------------------------------------------------------------------------------------------------------+
-; Register name                                                                                        ; Reason for Removal             ; Registers Removed due to This Register                                                                 ;
-+------------------------------------------------------------------------------------------------------+--------------------------------+--------------------------------------------------------------------------------------------------------+
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state.ready                         ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state.start,                          ;
-;                                                                                                      ; due to stuck port data_in      ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_enable,                                ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.start,    ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[3],     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[2],     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[7],     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[1],     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[0],     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|busy,           ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|scl_ena,        ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|scl_clk,        ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.rd,       ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.mstr_ack, ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.stop,     ;
-;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.ready     ;
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[1]                               ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[6],     ;
-;                                                                                                      ; due to stuck port data_in      ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|first                                      ;
-; top_level:Inst_top_level|address_counter:Inst_Address_Counter|address_int[24]                        ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[3]                                 ;
-;                                                                                                      ; due to stuck port data_in      ;                                                                                                        ;
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.command ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.slv_ack1  ;
-;                                                                                                      ; due to stuck port data_in      ;                                                                                                        ;
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.wr      ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.slv_ack2  ;
-;                                                                                                      ; due to stuck port data_in      ;                                                                                                        ;
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[1]    ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[2]      ;
-;                                                                                                      ; due to stuck port clock_enable ;                                                                                                        ;
-+------------------------------------------------------------------------------------------------------+--------------------------------+--------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                   ;
++------------------------------------------------------------------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------------------------+
+; Register name                                                                                        ; Reason for Removal             ; Registers Removed due to This Register                                                                ;
++------------------------------------------------------------------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------------------------+
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state.ready                         ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state.start,                         ;
+;                                                                                                      ; due to stuck port data_in      ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_enable,                               ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.start,   ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[3],    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[2],    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[7],    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[1],    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[0],    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|busy,          ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.stop,    ;
+;                                                                                                      ;                                ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.ready    ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[0]    ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|scl_ena,       ;
+;                                                                                                      ; due to stuck port data_in      ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|scl_clk        ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[1]                               ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[6],    ;
+;                                                                                                      ; due to stuck port data_in      ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|first                                     ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|addr_rw[1]    ; Stuck at VCC                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[3]                                ;
+;                                                                                                      ; due to stuck port data_in      ;                                                                                                       ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.rd      ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.mstr_ack ;
+;                                                                                                      ; due to stuck port data_in      ;                                                                                                       ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.command ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.slv_ack1 ;
+;                                                                                                      ; due to stuck port data_in      ;                                                                                                       ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.wr      ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|state.slv_ack2 ;
+;                                                                                                      ; due to stuck port data_in      ;                                                                                                       ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[1]    ; Stuck at GND                   ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[2]     ;
+;                                                                                                      ; due to stuck port clock_enable ;                                                                                                       ;
++------------------------------------------------------------------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -478,7 +504,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 362   ;
+; Total registers                              ; 396   ;
 ; Number of registers using Synchronous Clear  ; 110   ;
 ; Number of registers using Synchronous Load   ; 16    ;
 ; Number of registers using Asynchronous Clear ; 29    ;
@@ -514,12 +540,12 @@ Encoding Type:  One-Hot
 ; top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[1]                           ; 2       ;
 ; top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[0]                           ; 2       ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|sda_int ; 2       ;
+; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[0]               ; 2       ;
+; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[1]               ; 1       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_sync[0]               ; 2       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_sync[1]               ; 1       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[0]                 ; 2       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[1]                 ; 1       ;
-; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[0]               ; 2       ;
-; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[1]               ; 1       ;
 ; Total number of inverted registers = 27                                                        ;         ;
 +------------------------------------------------------------------------------------------------+---------+
 
@@ -529,31 +555,31 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_out[1]                  ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_out[0]                  ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 0 LEs                ; 12 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[7] ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset|btn_cntr[2]                  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_cntr[1]                    ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_cntr[15]                 ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_cntr[10]                   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_cntr[4]                  ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_cntr[15]                 ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|data_o[1]                       ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|data_o[3]                       ;
 ; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[3]                            ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[1]                            ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[2]                            ;
-; 5:1                ; 9 bits    ; 27 LEs        ; 9 LEs                ; 18 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|ROM_cnt[8]                      ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[25]                             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|cont_io_out[2]                      ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[2]                            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[1]                            ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 9 LEs                ; 18 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|ROM_cnt[2]                      ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[20]                             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|cont_io_out[14]                     ;
 ; 110:1              ; 5 bits    ; 365 LEs       ; 300 LEs              ; 65 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|currentByte_wr[1]                     ;
 ; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_cnt[7]                  ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[2] ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[4]                       ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[1]                       ;
-; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[18]                             ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[3]                       ;
+; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[3]                              ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|next_state.read1                    ;
-; 13:1               ; 4 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|Mux5                                  ;
+; 13:1               ; 4 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|Mux7                                  ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 9 LEs                ; 3 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state                            ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state                            ;
-; 9:1                ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.busy_high                       ;
-; 11:1               ; 2 bits    ; 14 LEs        ; 6 LEs                ; 8 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.repeat                          ;
+; 10:1               ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.busy_high                       ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.repeat                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
 
 
@@ -808,7 +834,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Wed Feb 09 12:46:16 2022
+    Info: Processing started: Wed Feb 09 16:19:54 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Lab2 -c Lab2
 Info (11104): Parallel Compilation has detected 16 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 8 of the 8 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file btn_debounce_toggle.vhd
@@ -896,7 +922,23 @@ Warning (10492): VHDL Process Statement warning at address_counter.vhd(35): sign
 Warning (10631): VHDL Process Statement warning at address_counter.vhd(33): inferring latch(es) for signal or variable "increment_value", which holds its previous value in one or more paths through the process
 Warning (10492): VHDL Process Statement warning at address_counter.vhd(49): signal "clk_cnt" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at address_counter.vhd(53): signal "clk_cnt" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Info (10041): Inferred latch for "increment_value" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[0]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[1]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[2]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[3]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[4]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[5]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[6]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[7]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[8]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[9]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[10]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[11]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[12]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[13]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[14]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[15]" at address_counter.vhd(33)
+Info (10041): Inferred latch for "increment_value[16]" at address_counter.vhd(33)
 Info (12128): Elaborating entity "ROM1Port" for hierarchy "top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port"
 Info (12128): Elaborating entity "altsyncram" for hierarchy "top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component"
 Info (12130): Elaborated megafunction instantiation "top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port|altsyncram:altsyncram_component"
@@ -964,6 +1006,27 @@ Warning (13039): The following bidir pins have no drivers
     Warning (13040): Bidir "GPIO[33]" has no driver
     Warning (13040): Bidir "GPIO[34]" has no driver
     Warning (13040): Bidir "GPIO[35]" has no driver
+Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[0]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[3]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[7]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[8]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[9]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[14]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[2]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[13]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[6]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[13]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[5]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[12]"
+    Info (13026): Duplicate LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[1]" merged with LATCH primitive "top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[10]"
+Warning (13012): Latch top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[16] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal top_level:Inst_top_level|system_controller:Inst_system_controller|speed_sel[1]
+Warning (13012): Latch top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[13] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal top_level:Inst_top_level|system_controller:Inst_system_controller|speed_sel[0]
+Warning (13012): Latch top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[12] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal top_level:Inst_top_level|system_controller:Inst_system_controller|speed_sel[1]
+Warning (13012): Latch top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[11] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal top_level:Inst_top_level|system_controller:Inst_system_controller|speed_sel[1]
+Warning (13012): Latch top_level:Inst_top_level|address_counter:Inst_Address_Counter|increment_value[10] has unsafe behavior
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal top_level:Inst_top_level|system_controller:Inst_system_controller|speed_sel[0]
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13004): Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
@@ -1007,16 +1070,16 @@ Info (286030): Timing-Driven Synthesis is running
 Info (17049): 5 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 879 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 933 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 5 input pins
     Info (21059): Implemented 30 output pins
     Info (21060): Implemented 60 bidirectional pins
-    Info (21061): Implemented 768 logic cells
+    Info (21061): Implemented 822 logic cells
     Info (21064): Implemented 16 RAM segments
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 110 warnings
-    Info: Peak virtual memory: 4712 megabytes
-    Info: Processing ended: Wed Feb 09 12:46:27 2022
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:03
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 120 warnings
+    Info: Peak virtual memory: 4705 megabytes
+    Info: Processing ended: Wed Feb 09 16:20:04 2022
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:04
 
 

@@ -12,19 +12,19 @@ Address counter:
 	
 DONE:
 Must write address_counter - Aaron
-Must finish filter - Cameron: I (Aaron) think this is good now?
+Must finish filter - Cameron
 Must write I2C controller - Aaron
 Must make top_level connections (both muxes will be contained in this) - Weston & Aaron
 Must finish DE2_115 connections - Aaron
 
 IN PROGRESS:
 Debugging (obviously)
-	- PWM Frequencies
+	- PWM Frequencies - hopefully good
 	- PWM on/off: abuse the clk_en pin
-	- LCD Refresh
+	- LCD Refresh - hopefully good
 	- i2c at all
 	
-Redesign of LCD_user logic:
+Redesign of LCD_user logic: - DONE
 	- Make an en pulse to start the transmission.  This builds in the pause to the system_controller so things refresh exactly when needed.
 		- system_controller needs to be updated to send this pulse--OR clk_en_1 and an internal signal.  This allows us to force the refresh when modes are changed, etc.
 	- Init:  bytes 0 - 21

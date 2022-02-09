@@ -44,18 +44,21 @@ architecture behavioral of system_controller is
 	signal SRAM_valid_int    : std_logic;                            --Should the SRAM_Controller begin
 	signal LCD_en_int        : std_logic;                            --should we refresh the LCD, combined with clk_en_1
 	signal refresh_LCD       : std_logic;                            --should we refresh the LCD (on mode change)
+	signal counter_incr      : std_logic;
 	
-	--For 1 Hz 
+	--For Clock Emables 
 	signal clk_cnt : integer range 0 to 50000000-1;                  --Counter for the clk_en at 1 hz
+	signal clk_cnt_100 : integer range 0 to 500000-1;
 	signal run_counter : std_logic;                                  --should we run the counter?
 	signal clk_en_1 : std_logic;                                     --1 Hz clock enable
+	signal clk_en_100 : std_logic;
 	
 	begin
 	
 	state <= next_state;
 	SRAM_rw <= SRAM_rw_int;
 	SRAM_valid <= SRAM_valid_int;
-	LCD_en_int <= clk_en_1 or refresh_LCD;
+	LCD_en_int <= counter_incr or refresh_LCD or pause_btn or pwm_btn or speed_btn or reset_h;
 	LCD_en <= LCD_en_int;
 	
 	--Process for state machine
@@ -88,7 +91,7 @@ architecture behavioral of system_controller is
 							address_cnt <= 0;
 							data_o   <= (others => '0');
 						end if;	
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 						
@@ -116,7 +119,7 @@ architecture behavioral of system_controller is
 							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the count
 						end if;
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 						
@@ -144,7 +147,7 @@ architecture behavioral of system_controller is
 							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the count
 						end if;
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 						
@@ -166,7 +169,7 @@ architecture behavioral of system_controller is
 							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
 						end if;
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 						
@@ -188,7 +191,7 @@ architecture behavioral of system_controller is
 							refresh_LCD <= '1';
 							address_cnt <= 0;                                          --and reset the address
 						end if;
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 					
@@ -210,7 +213,7 @@ architecture behavioral of system_controller is
 							next_state <= test;                                        --do it
 							address_cnt <= 0;                                          --and reset the address
 						end if;
-						if refresh_LCD = '1' then
+						if refresh_LCD = '1' and clk_en_100 = '1' then
 							refresh_LCD <= '0';
 						end if;
 						
@@ -223,28 +226,39 @@ architecture behavioral of system_controller is
 				next_state <= init;             --move to init
 				data_o <= (others => '0');      --reset to 0s
 				address_out <= (others => '0'); --reset to 0s
-				SRAM_rw_int <= '1';                 --reading
+				SRAM_rw_int <= '1';             --reading
 				SRAM_valid_int <= '0';          --reset to 0
 				ROM_cnt <= 0;                   --reset to 0
 				address_cnt <= 0;               --reset to 0
 			end if;
 		
 		--1 Hz clock enable
-			if clk_cnt = (50000000)-1 and run_counter = '1' then --for hardware
+			if clk_cnt = (50000000)-1 then --for hardware
 				clk_cnt <= 0;
 				clk_en_1 <= '1';
 			else
 				clk_cnt <= clk_cnt + 1;
 				clk_en_1 <= '0';
 			end if;
+			
+		--1000 Hz clock enable
+			if clk_cnt = (50000)-1 then --for hardware
+				clk_cnt_100 <= 0;
+				clk_en_100 <= '1';
+			else
+				clk_cnt_100 <= clk_cnt_100 + 1;
+				clk_en_100 <= '0';
+			end if;
 		
 		--1 Hz operation counter
 			if run_counter = '1' then
 				if SRAM_busy_h = '1' then
 					SRAM_valid_int <= '0';
+					counter_incr <= '0';
 				elsif clk_en_1 = '1' then
 					read_SRAM <= '1';
 					address_cnt <= address_cnt + 1;
+					counter_incr <= '1';
 					if address_cnt = 255 then
 						address_cnt <= 0;
 					end if;

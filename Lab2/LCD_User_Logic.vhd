@@ -207,9 +207,11 @@ process(iClk, reset_h)
                     else
                         reset_LCD <= '0' or reset;
                         currentByte_wr <= currentByte;
-						if LCD_en = '1' then
-							state <= ready;
-						end if;
+								if byteSel /= byte_start then
+									state <= ready;
+								elsif LCD_en = '1' then
+									state <= ready;
+								end if;
                     end if;
                     
                 when ready =>
