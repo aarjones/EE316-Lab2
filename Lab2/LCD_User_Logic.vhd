@@ -6,7 +6,7 @@ entity LCD_User_Logic is
     Port(
 		iClk          : in  std_logic;                     --50 MHz    
         reset         : in  std_logic;
-		en            : in  std_logic;                     --a pulse to make the system write to the LCD
+		LCD_en            : in  std_logic;                     --a pulse to make the system write to the LCD
 		 
 		speed_sel     : in  std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 Hz
 		 
@@ -48,7 +48,7 @@ signal currentRS : std_logic;
 signal byteSel : integer range 0 to 109 := 0;
 signal count : unsigned(27 DOWNTO 0):=X"00ffffF";
 signal ena : std_logic;
-signal byte_end_int : integer range 0 to 94;
+signal byte_end_int : integer range 0 to 109;
 signal reset_h_edge : std_logic;
 signal q0, q1 : std_logic;
 
@@ -207,7 +207,7 @@ process(iClk, reset_h)
                     else
                         reset_LCD <= '0' or reset;
                         currentByte_wr <= currentByte;
-						if en = '1' then
+						if LCD_en = '1' then
 							state <= ready;
 						end if;
                     end if;
@@ -236,9 +236,9 @@ process(iClk, reset_h)
 								if byte_end_int = byte_end then
 									case(speed_sel) is
 										when "00" => byteSel <= byte_start; byte_end_int <= byte_end; --not running
-										when "01" => byteSel <= byte_start; byte_end_int <= byte_end --60 hz
-										when "10" => byteSel <= 97;         byte_end_int <= 102; --120 hz
-										when "11" => byteSel <= 103;        byte_end_int <= 109; --1000 hz
+										when "01" => byteSel <= byte_start; byte_end_int <= byte_end; --60 hz
+										when "10" => byteSel <= 97;         byte_end_int <= 102;      --120 hz
+										when "11" => byteSel <= 103;        byte_end_int <= 109;      --1000 hz
 									end case;
 								else
 									byteSel      <= byte_start;

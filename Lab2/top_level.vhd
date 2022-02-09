@@ -74,7 +74,7 @@ architecture behavioral of top_level is
 	signal data_sel : std_logic;
 	signal byte_start : integer range 0 to 109;
 	signal byte_end : integer range 0 to 109;
-	signal LCD_en : std_logic;
+	signal LCD_en_int : std_logic;
 	
 	component SRAM_Controller is
 		generic(
@@ -125,7 +125,7 @@ architecture behavioral of top_level is
 		port(
 			iClk          : in  std_logic;                     --50 MHz    
 			reset         : in  std_logic;
-			en            : in  std_logic;                     --a pulse to make the system write to the LCD
+			LCD_en        : in  std_logic;                     --a pulse to make the system write to the LCD
 		  
 			speed_sel     : in  std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
 		  
@@ -177,7 +177,7 @@ architecture behavioral of top_level is
 	
 	component address_counter is
 		generic(
-			constant BASE_AMOUNT     : integer := 16_777_215; --Bottom 24 Bits
+			constant FULL_AMOUNT     : integer := 4_294_967_296; --Bottom 24 Bits
 			constant OPERATION_SPEED : integer := 12_000;     --12 KHz
 			constant CLK_SPEED       : integer := 50_000_000  --50 MHz
 		);
@@ -278,7 +278,7 @@ architecture behavioral of top_level is
 		port map( 
 			iClk => clk,
 			reset => reset_h,
-			en => LCD_en,
+			LCD_en => LCD_en_int,
 		  
 			speed_sel => speed_sel,
 		  
@@ -305,6 +305,7 @@ architecture behavioral of top_level is
 			speed_sel => speed_sel,
 			byte_start => byte_start,
 			byte_end => byte_end,
+			LCD_en => LCD_en_int,
 			
 			--SRAM Controller Connections
 			SRAM_busy_h => SRAM_busy_h,
