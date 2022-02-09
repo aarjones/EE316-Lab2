@@ -11,6 +11,9 @@ entity system_controller is
 		pwm_btn      : in    std_logic;                     --switch between Test and PWM
 		speed_btn    : in    std_logic;                     --change speeds
 		
+		--PWM Connections
+		run_PWM      : out   std_logic;                     --should the PWM be on?
+		
 		--LCD Connections
 		speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
 		byte_start   : out   integer range 0 to 109;        --starting byte
@@ -58,8 +61,8 @@ architecture behavioral of system_controller is
 	state <= next_state;
 	SRAM_rw <= SRAM_rw_int;
 	SRAM_valid <= SRAM_valid_int;
-	LCD_en_int <= counter_incr or refresh_LCD or pause_btn or pwm_btn or speed_btn or reset_h;
-	LCD_en <= LCD_en_int;
+	LCD_en_int <= counter_incr or refresh_LCD or pause_btn or pwm_btn or speed_btn;
+	LCD_en <= LCD_en_int when (reset_h = '0') else '0';
 	
 	--Process for state machine
 	process(clk) begin
@@ -67,8 +70,9 @@ architecture behavioral of system_controller is
 			if reset_h = '0' then
 				case(state) is 
 					when init =>
+						run_PWM     <= '0';
 						speed_sel   <= "00";                                          --ignore the speed
-						byte_start  <= 0;                                             --start at the first byte
+						byte_start  <= 8;                                             --start at the first byte
 						byte_end    <= 21;                                            --end at byte 21
 						SRAM_rw_int <= '0';                                           --we're writing
 						data_select <= '0';                                           --reading from ROM
@@ -96,6 +100,7 @@ architecture behavioral of system_controller is
 						end if;
 						
 					when test =>
+						run_PWM     <= '0';
 						speed_sel   <= "00";                                          --ignore the speed
 						byte_start  <= 22;                                            --start at the first byte
 						byte_end    <= 47;                                            --end at byte 21
@@ -124,6 +129,7 @@ architecture behavioral of system_controller is
 						end if;
 						
 					when pause =>
+						run_PWM     <= '0';
 						speed_sel   <= "00";                                          --ignore the speed
 						byte_start  <= 48;                                            --start at the first byte
 						byte_end    <= 74;                                            --end at byte 21
@@ -152,6 +158,7 @@ architecture behavioral of system_controller is
 						end if;
 						
 					when pwm60 =>
+						run_PWM     <= '1';
 						speed_sel   <= "01";                                          --60 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 96;                                            --end at byte 21
@@ -174,6 +181,7 @@ architecture behavioral of system_controller is
 						end if;
 						
 					when pwm120 =>
+						run_PWM     <= '1';
 						speed_sel   <= "10";                                          --120 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 91;                                            --end at byte 21
@@ -196,6 +204,7 @@ architecture behavioral of system_controller is
 						end if;
 					
 					when pwm1000 =>
+						run_PWM     <= '1';
 						speed_sel   <= "11";                                          --1000 Hz
 						byte_start  <= 75;                                            --start at the first byte
 						byte_end    <= 91;                                            --end at byte 21
@@ -219,9 +228,10 @@ architecture behavioral of system_controller is
 						
 				end case;
 			elsif reset_h = '1' then
-				refresh_LCD <= '1';
+				run_PWM     <= '0';
+				refresh_LCD <= '0';
 				speed_sel   <= "00";            --ignore the speed
-				byte_start  <= 0;               --start at the first byte
+				byte_start  <= 8;               --start at the first byte
 				byte_end    <= 21;              --end at byte 21
 				next_state <= init;             --move to init
 				data_o <= (others => '0');      --reset to 0s
@@ -233,7 +243,7 @@ architecture behavioral of system_controller is
 			end if;
 		
 		--1 Hz clock enable
-			if clk_cnt = (50000000)-1 then --for hardware
+			if clk_cnt = (50_000_000)-1 then --for hardware
 				clk_cnt <= 0;
 				clk_en_1 <= '1';
 			else
@@ -242,7 +252,7 @@ architecture behavioral of system_controller is
 			end if;
 			
 		--1000 Hz clock enable
-			if clk_cnt = (50000)-1 then --for hardware
+			if clk_cnt = (50_000)-1 then --for hardware
 				clk_cnt_100 <= 0;
 				clk_en_100 <= '1';
 			else

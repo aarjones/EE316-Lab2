@@ -42,7 +42,7 @@ end top_level;
 architecture behavioral of top_level is
 	--General Signals
 	signal reset_h : std_logic := '0';
-	signal reset_debounced : std_logic;
+	signal reset_pulse_h : std_logic;
 	signal reset_delay_out : std_logic := '0';
 	signal clk_en_op : std_logic;
 	
@@ -50,6 +50,8 @@ architecture behavioral of top_level is
 	signal pause_pulse : std_logic;
 	signal speed_pulse : std_logic;
 	signal pwm_pulse : std_logic;
+	signal reset_pulse : std_logic;
+	signal reset_debounced : std_logic;
 	
 	--Data Sgnals
 	signal data_ascii : std_logic_vector(31 downto 0);
@@ -75,6 +77,7 @@ architecture behavioral of top_level is
 	signal byte_start : integer range 0 to 109;
 	signal byte_end : integer range 0 to 109;
 	signal LCD_en_int : std_logic;
+	signal run_PWM : std_logic;
 	
 	component SRAM_Controller is
 		generic(
@@ -125,6 +128,7 @@ architecture behavioral of top_level is
 		port(
 			iClk          : in  std_logic;                     --50 MHz    
 			reset         : in  std_logic;
+			reset_pulse   : in  std_logic;
 			LCD_en        : in  std_logic;                     --a pulse to make the system write to the LCD
 		  
 			speed_sel     : in  std_logic_vector(1 downto 0);  --60, 120, or 1000 Hz
@@ -199,6 +203,9 @@ architecture behavioral of top_level is
 			pwm_btn      : in    std_logic;                     --switch between Test and PWM
 			speed_btn    : in    std_logic;                     --change speeds
 			
+			--PWM Connections
+			run_PWM      : out   std_logic;                     --should the PWM be on
+			
 			--LCD Connections
 			speed_sel    : out   std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 hz
 			byte_start   : out   integer range 0 to 109;        --starting byte
@@ -233,7 +240,7 @@ architecture behavioral of top_level is
 		port map(
 			clk => clk,
 			reset => reset_h,
-			clk_en => '1',
+			clk_en => run_PWM,
 			value_i => data_muxed,
 			pwm_o => pwm_out 
 		);
@@ -277,7 +284,8 @@ architecture behavioral of top_level is
 	Inst_LCD_User_Logic: LCD_User_Logic
 		port map( 
 			iClk => clk,
-			reset => reset_h,
+			reset => reset_debounced,
+			reset_pulse => reset_pulse,
 			LCD_en => LCD_en_int,
 		  
 			speed_sel => speed_sel,
@@ -300,6 +308,9 @@ architecture behavioral of top_level is
 			pause_btn => pause_pulse,
 			pwm_btn => pwm_pulse,
 			speed_btn => speed_pulse,
+			
+			--PWM Connections
+			run_PWM => run_PWM,
 			
 			--LCD Connections
 			speed_sel => speed_sel,
@@ -371,7 +382,7 @@ architecture behavioral of top_level is
 			BTN_I => reset,
 			CLK => clk,
 			BTN_O	=> reset_debounced,
-			PULSE_O => open,
+			PULSE_O => reset_pulse,
 			TOGGLE_O => open
 		);
 		
@@ -410,6 +421,7 @@ architecture behavioral of top_level is
 	
 	--GENERAL CONNECTIONS
 	reset_h <= not reset_debounced or reset_delay_out;
+	reset_pulse_h <= reset_pulse or reset_delay_out;
 		
 	--PROCESSES
 	Mux1_Process: process(speed_sel, system_address, counter_address) --ADDRESS MULTIPLEXOR

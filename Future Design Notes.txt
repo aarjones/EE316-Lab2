@@ -16,14 +16,6 @@ Must finish filter - Cameron
 Must write I2C controller - Aaron
 Must make top_level connections (both muxes will be contained in this) - Weston & Aaron
 Must finish DE2_115 connections - Aaron
-
-IN PROGRESS:
-Debugging (obviously)
-	- PWM Frequencies - hopefully good
-	- PWM on/off: abuse the clk_en pin
-	- LCD Refresh - hopefully good
-	- i2c at all
-	
 Redesign of LCD_user logic: - DONE
 	- Make an en pulse to start the transmission.  This builds in the pause to the system_controller so things refresh exactly when needed.
 		- system_controller needs to be updated to send this pulse--OR clk_en_1 and an internal signal.  This allows us to force the refresh when modes are changed, etc.
@@ -33,5 +25,14 @@ Redesign of LCD_user logic: - DONE
 	- PWM60: bytes 75 - 96
 	- PWM12: Bytes 75 - 91; 97 - 102
 	- PWM10: Bytes 75 - 91; 103 - 109
+Debugging:
+	- PWM Frequencies - hopefully good
+	- PWM on/off: abuse the clk_en pin
+	- LCD Refresh - fix when under reset
+
+IN PROGRESS:
+Debugging (obviously)
+	- i2c at all
+	- Make it run off of the SRAM again
 
 NOT STARTED:

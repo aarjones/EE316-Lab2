@@ -5,8 +5,9 @@ use IEEE.numeric_std.all;
 entity LCD_User_Logic is
     Port(
 		iClk          : in  std_logic;                     --50 MHz    
-        reset         : in  std_logic;
-		LCD_en            : in  std_logic;                     --a pulse to make the system write to the LCD
+      reset         : in  std_logic;
+		reset_pulse   : in  std_logic;
+		LCD_en        : in  std_logic;                     --a pulse to make the system write to the LCD
 		 
 		speed_sel     : in  std_logic_vector(1 downto 0);  --ignore, 60, 120, or 1000 Hz
 		 
@@ -16,9 +17,9 @@ entity LCD_User_Logic is
 		data_ascii    : in  std_logic_vector(31 downto 0); --ASCII character inputs for the 16-bit data
 		address_ascii : in  std_logic_vector(15 downto 0); --ASCII character inputs for the 8-bit address
 
-        Data          : out std_logic_vector (7 downto 0); --to LCD
-        en            : out std_logic;                     --to LCD
-        rs            : out std_logic                      --to LCD
+      Data          : out std_logic_vector (7 downto 0); --to LCD
+      en            : out std_logic;                     --to LCD
+      rs            : out std_logic                      --to LCD
      ); 
 end LCD_User_Logic;
 
@@ -51,12 +52,13 @@ signal ena : std_logic;
 signal byte_end_int : integer range 0 to 109;
 signal reset_h_edge : std_logic;
 signal q0, q1 : std_logic;
+signal first : std_logic;
 
 begin
 
 Data <= currentByte_wr;
 rs <= RS_sig;
-reset_h <= reset;
+reset_h <= reset_pulse;
 
 Inst_LCD_Transmitter : LCD_Transmitter
     port map(
@@ -77,10 +79,10 @@ process(byteSel)
             when 3   => currentByte <= X"00"; RS_sig <= '0'; --clear display
             when 4   => currentByte <= X"00"; RS_sig <= '0'; --clear display
             when 5   => currentByte <= X"00"; RS_sig <= '0'; --clear display
-            when 6   => currentByte <= X"00"; RS_sig <= '0'; --clear display
-            when 7   => currentByte <= X"80"; RS_sig <= '0'; --Send cursor to top row
-            when 8   => currentByte <= X"02"; RS_sig <= '0'; --return home
-            when 9   => currentByte <= X"04"; RS_sig <= '0'; --display on, cursor off, cursor blink off
+            when 6   => currentByte <= X"02"; RS_sig <= '0'; --return home
+            when 7   => currentByte <= X"04"; RS_sig <= '0'; --display on, cursor off, cursor blink offreturn home
+            when 8   => currentByte <= X"00"; RS_sig <= '0'; --clear display
+            when 9   => currentByte <= X"80"; RS_sig <= '0'; --Send cursor to top row
             when 10  => currentByte <= X"49"; RS_sig <= '1'; -- "I" 
             when 11  => currentByte <= X"6E"; RS_sig <= '1'; -- "n"
             when 12  => currentByte <= X"69"; RS_sig <= '1'; -- "i"
@@ -93,8 +95,8 @@ process(byteSel)
             when 19  => currentByte <= X"69"; RS_sig <= '1'; -- "i"
             when 20  => currentByte <= X"6E"; RS_sig <= '1'; -- "n"
             when 21  => currentByte <= X"67"; RS_sig <= '1'; -- "g"                           --END INIT
-			when 22  => currentByte <= X"00"; RS_sig <= '0'; -- clear display                 --START TEST MODE
-			when 23  => currentByte <= X"80"; RS_sig <= '0'; -- send curor to top row
+			   when 22  => currentByte <= X"00"; RS_sig <= '0'; -- clear display                 --START TEST MODE
+			   when 23  => currentByte <= X"80"; RS_sig <= '0'; -- send curor to top row
             when 24  => currentByte <= X"54"; RS_sig <= '1'; -- "T"  
             when 25  => currentByte <= X"65"; RS_sig <= '1'; -- "e"
             when 26  => currentByte <= X"73"; RS_sig <= '1'; -- "s"
@@ -193,7 +195,8 @@ process(iClk, reset_h)
 			reset_h_edge <= not q0 and q1;
 		end if;
 	 
-        if(reset_h_edge = '1') then
+        if(reset_h = '1') then
+				first <= '1';
             byteSel <= 0;
 				byte_end_int <= byte_end;
         elsif(rising_edge(iClk)) then
@@ -201,15 +204,18 @@ process(iClk, reset_h)
                 when start => 
                     if count /= X"0000000" then
                         count <= count - 1;
-                        reset_LCD <= '1' or reset;
+                        reset_LCD <= '1' or reset_pulse;
                         state <= start;
                         ena <= '0';
                     else
-                        reset_LCD <= '0' or reset;
+                        reset_LCD <= '0' or reset_pulse;
                         currentByte_wr <= currentByte;
-								if byteSel /= byte_start then
+								if byteSel /= byte_start or (byteSel < byte_start) or first = '1' then
 									state <= ready;
-								elsif LCD_en = '1' then
+									if byteSel = byte_start then
+										first <= '0';
+									end if;
+								elsif (LCD_en = '1') then
 									state <= ready;
 								end if;
                     end if;
@@ -246,9 +252,9 @@ process(iClk, reset_h)
 									byteSel      <= byte_start;
 									byte_end_int <= byte_end;
 								end if;
-								count <= X"00000fF";
+								count <= X"00000FF";
                     end if;
-                    state <= start;
+						  state <= start;
             end case;
         end if;
     end process;
