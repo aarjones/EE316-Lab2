@@ -17,8 +17,8 @@ end i2c_user_logic;
 architecture behavioral of i2c_user_logic is
 	component i2c_master is
 		GENERIC(
-			input_clk : INTEGER := 100_000_000; --input clock speed from user logic in Hz
-			bus_clk   : INTEGER := 400_000);    --speed the i2c bus (scl) will run at in Hz
+			input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
+			bus_clk   : INTEGER := 50_000);    --speed the i2c bus (scl) will run at in Hz
 		PORT(
 			clk       : IN     STD_LOGIC;                    --system clock
 			reset_n   : IN     STD_LOGIC;                    --active low reset
@@ -86,6 +86,7 @@ architecture behavioral of i2c_user_logic is
 				case(state) is 
 					when start =>
 						i2c_enable <= '0'; --don't start the i2c transaction
+						next_state <= ready;
 						
 					when ready =>
 						if i2c_busy = '0' then       --if we can go to the next transaction
@@ -128,6 +129,7 @@ architecture behavioral of i2c_user_logic is
 		case(address_sel) is
 			when '0' => i2c_address <= addr_1;
 			when '1' => i2c_address <= addr_2;
+			when others => null;
 		end case;
 	end process;
 	
@@ -135,13 +137,13 @@ architecture behavioral of i2c_user_logic is
 	process(byteSel, data_hex)
 	begin
 		case byteSel is
-			when 0      => i2c_data <= X"81";
+			when 0      => i2c_data <= X"76";
 			when 1      => i2c_data <= X"76";
 			when 2      => i2c_data <= X"76";
 			when 3      => i2c_data <= X"7A";
 			when 4      => i2c_data <= X"FF";
 			when 5      => i2c_data <= X"77";
-			when 6      => i2c_data <= X"00";
+			when 6      => i2c_data <= X"FF";
 			when 7      => i2c_data <= X"79"; --Repeat here
 			when 8      => i2c_data <= X"00";
 			when 9      => i2c_data <= X"0"&data_hex(15 downto 12);

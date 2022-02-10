@@ -1,0 +1,356 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\jones\Desktop\EE316-Lab2\Lab2\simulation\modelsim
+Ebtn_debounce_toggle
+Z1 w1644447039
+Z2 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
+Z3 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
+Z4 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z5 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z6 dC:\Users\jones\Desktop\EE316-Lab2\Lab2\simulation\modelsim
+Z7 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/btn_debounce_toggle.vhd
+Z8 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/btn_debounce_toggle.vhd
+l0
+L32
+VAVM^9lkYb??]zZb_];PT=0
+Z9 OV;C;10.1d;51
+31
+Z10 !s108 1644519753.722000
+Z11 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/btn_debounce_toggle.vhd|
+Z12 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/btn_debounce_toggle.vhd|
+Z13 o-93 -work work -O0
+Z14 tExplicit 1
+!s100 <;GCU2]AikzQa1XGhK]Rn0
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 19 btn_debounce_toggle 0 22 AVM^9lkYb??]zZb_];PT=0
+l53
+L42
+V7VDgW?^J>=5McD1ZoLSW=3
+R9
+31
+R10
+R11
+R12
+R13
+R14
+!s100 WK:zBC@<9SiHakzP9VZTe1
+!i10b 1
+Ehex_to_ascii
+Z15 w1644345114
+Z16 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+R4
+R5
+R6
+Z17 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/HEX_to_ASCII.vhd
+Z18 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/HEX_to_ASCII.vhd
+l0
+L5
+VA^J@@Y22SRF?WP0`AVl]K3
+R9
+31
+Z19 !s108 1644519753.879000
+Z20 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/HEX_to_ASCII.vhd|
+Z21 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/HEX_to_ASCII.vhd|
+R13
+R14
+!s100 ncm;6K96zM5U[2AWQ>2MU2
+!i10b 1
+Abehavioral
+R16
+R4
+R5
+DEx4 work 12 hex_to_ascii 0 22 A^J@@Y22SRF?WP0`AVl]K3
+l17
+L15
+VWYMj7XOA=HJG]]hFdZlL00
+R9
+31
+R19
+R20
+R21
+R13
+R14
+!s100 ?el@^eKcNXlgR<QH=?2^B0
+!i10b 1
+Ei2c_master
+Z22 w1644345651
+R2
+R3
+R4
+R5
+R6
+Z23 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_master_2.1.vhd
+Z24 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_master_2.1.vhd
+l0
+L36
+Vjk:eIVoCL8e2A@H>m=AhX2
+R9
+31
+Z25 !s108 1644519753.993000
+Z26 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_master_2.1.vhd|
+Z27 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_master_2.1.vhd|
+R13
+R14
+!s100 RkY6@Fo3OOgA<M^5Cj_IM2
+!i10b 1
+Alogic
+R2
+R3
+R4
+R5
+DEx4 work 10 i2c_master 0 22 jk:eIVoCL8e2A@H>m=AhX2
+l69
+L54
+V4b@eY6Ca8oL0kB597chd?2
+R9
+31
+R25
+R26
+R27
+R13
+R14
+!s100 ^25:32]le_DR>fJHmEbP61
+!i10b 1
+Ei2c_user_logic
+Z28 w1644519892
+R4
+R5
+R6
+Z29 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_user_logic.vhd
+Z30 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_user_logic.vhd
+l0
+L6
+VECO1hVJ>1A@U9F?_JkSQ62
+!s100 >8jRD6iS7Z^DAM]Vn6^1V3
+R9
+32
+!i10b 1
+Z31 !s108 1644519898.678000
+Z32 !s90 -reportprogress|300|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_user_logic.vhd|
+Z33 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/i2c_user_logic.vhd|
+Z34 o-work work -O0
+R14
+Abehavioral
+R4
+R5
+DEx4 work 14 i2c_user_logic 0 22 ECO1hVJ>1A@U9F?_JkSQ62
+l54
+L17
+VNCKB7K1EC0Ii67On4eV0F1
+!s100 i7WUO;>hhP8zN24;IN:QH0
+R9
+32
+!i10b 1
+R31
+R32
+R33
+R34
+R14
+Elcd_user_logic
+w1644519547
+R16
+R4
+R5
+R6
+8C:/Users/jones/Desktop/EE316-Lab2/Lab2/LCD_User_Logic.vhd
+FC:/Users/jones/Desktop/EE316-Lab2/Lab2/LCD_User_Logic.vhd
+l0
+L5
+V]hNC]:;GM9WSPM0BLSX2Z1
+R9
+31
+R13
+R14
+!s100 H2:j^:M>b31hAb]M2?l0U2
+!i10b 1
+!s108 1644519754.214000
+!s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/LCD_User_Logic.vhd|
+!s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/LCD_User_Logic.vhd|
+Epwm
+Z35 w1644349764
+R16
+R4
+R5
+R6
+Z36 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/PWM.vhd
+Z37 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/PWM.vhd
+l0
+L5
+V=476jKL@h8^=>ZOnS8OhS2
+R9
+31
+Z38 !s108 1644519753.816000
+Z39 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/PWM.vhd|
+Z40 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/PWM.vhd|
+R13
+R14
+!s100 V:a=GnmR39AWEO0acROI02
+!i10b 1
+Abehavioral
+R16
+R4
+R5
+DEx4 work 3 pwm 0 22 =476jKL@h8^=>ZOnS8OhS2
+l24
+L18
+VRRY`A5@=Y6SERPFP0Jf842
+R9
+31
+R38
+R39
+R40
+R13
+R14
+!s100 Xl^i8j4Dc04]ZH5^mQ5?n0
+!i10b 1
+Ereset_delay
+Z41 w1635893926
+R16
+R4
+R5
+R6
+Z42 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/reset_delay.vhd
+Z43 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/reset_delay.vhd
+l0
+L9
+VD3H3lI^BWdd87KS:^YlMZ3
+R9
+31
+Z44 !s108 1644519754.154000
+Z45 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/reset_delay.vhd|
+Z46 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/reset_delay.vhd|
+R13
+R14
+!s100 ;=_7IoCHK=Dg;J>7jX[`I3
+!i10b 1
+Aarch
+R16
+R4
+R5
+DEx4 work 11 reset_delay 0 22 D3H3lI^BWdd87KS:^YlMZ3
+l21
+L17
+VZFNL``06P>o>CdhK<MTbl2
+R9
+31
+R44
+R45
+R46
+R13
+R14
+!s100 aJ120;YWU39K<adQBz43e1
+!i10b 1
+Erom1port
+Z47 w1642884050
+R4
+R5
+R6
+Z48 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/ROM1Port.vhd
+Z49 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/ROM1Port.vhd
+l0
+L42
+Vm?WhJEkfIXCaR2SHm]9@P0
+R9
+31
+Z50 !s108 1644519754.102000
+Z51 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/ROM1Port.vhd|
+Z52 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/ROM1Port.vhd|
+R13
+R14
+!s100 K]ZHb00MX4h=7`o:1=cDO3
+!i10b 1
+Asyn
+R4
+R5
+DEx4 work 8 rom1port 0 22 m?WhJEkfIXCaR2SHm]9@P0
+l82
+L52
+VGLM=lUE1W<RHAQ]f=DnbJ1
+R9
+31
+R50
+R51
+R52
+R13
+R14
+!s100 KWhgAi[=NISm<<gQaP44c2
+!i10b 1
+Esram_controller
+Z53 w1643653935
+R4
+R5
+R6
+Z54 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/SRAM_Controller.vhd
+Z55 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/SRAM_Controller.vhd
+l0
+L6
+V318AUTY<GjA9jdRH>jae50
+R9
+31
+Z56 !s108 1644519754.050000
+Z57 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/SRAM_Controller.vhd|
+Z58 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/SRAM_Controller.vhd|
+R13
+R14
+!s100 _JTJHL2A>^a>d>9jhGhdW1
+!i10b 1
+Abehavioral
+R4
+R5
+DEx4 work 15 sram_controller 0 22 318AUTY<GjA9jdRH>jae50
+l48
+L36
+VDY25jXC;G6a0Ul2<=1nc`2
+R9
+31
+R56
+R57
+R58
+R13
+R14
+!s100 UE19TTBBn`]<Cfca9JXge0
+!i10b 1
+Esystem_controller
+Z59 w1644448382
+R16
+R4
+R5
+R6
+Z60 8C:/Users/jones/Desktop/EE316-Lab2/Lab2/system_controller.vhd
+Z61 FC:/Users/jones/Desktop/EE316-Lab2/Lab2/system_controller.vhd
+l0
+L5
+V9MN;>hU7W:LkmID:zfXKa2
+R9
+31
+Z62 !s108 1644519753.937000
+Z63 !s90 -reportprogress|300|-93|-work|work|C:/Users/jones/Desktop/EE316-Lab2/Lab2/system_controller.vhd|
+Z64 !s107 C:/Users/jones/Desktop/EE316-Lab2/Lab2/system_controller.vhd|
+R13
+R14
+!s100 GFGGmYCSZj?0RHT39>2Sk0
+!i10b 1
+Abehavioral
+R16
+R4
+R5
+DEx4 work 17 system_controller 0 22 9MN;>hU7W:LkmID:zfXKa2
+l59
+L34
+V6Tn>TkEbc?o`mCB`XJ9U^0
+R9
+31
+R62
+R63
+R64
+R13
+R14
+!s100 EF4ob4@_oOU8;2>42FZ3W0
+!i10b 1
