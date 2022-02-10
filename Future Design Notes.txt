@@ -34,5 +34,9 @@ Debugging:
 IN PROGRESS:
 Debugging (obviously)
 	- i2c at all
+		- Set up second address
+		- Make separate address/data groups in the i2c user_logic muxes
+	- Add "reset_delay" to refresh the LCD on button presses
+		- As opposed to hoping the clk_en comes at the right time
 
 NOT STARTED:
