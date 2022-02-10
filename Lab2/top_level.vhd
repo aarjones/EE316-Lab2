@@ -150,6 +150,7 @@ architecture behavioral of top_level is
 			clk      : in    std_logic;                     --clock input
 			reset_h  : in    std_logic;                     --active-high reset
 			data_hex : in    std_logic_vector(15 downto 0); --the data to display on the seven segments
+			address_hex : in std_logic_vector(7  downto 0); --the address to display
 			
 			sda      : inout std_logic;                     --i2c data
 			scl      : inout std_logic                      --i2c clock
@@ -333,6 +334,7 @@ architecture behavioral of top_level is
 			clk => clk,
 			reset_h => reset_h,
 			data_hex => data_muxed,
+			address_hex => addr_muxed,
 			
 			sda => sda,
 			scl => scl

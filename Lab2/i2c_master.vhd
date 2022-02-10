@@ -15,7 +15,7 @@
 --   ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.
 --
 --   Version History
---   Version 1.0 11/1/2012 Scott Larson
+--   Version 1.0 11/01/2012 Scott Larson
 --     Initial Public Release
 --   Version 2.0 06/20/2014 Scott Larson
 --     Added ability to interface with different slaves in the same transaction
@@ -24,6 +24,8 @@
 --   Version 2.1 10/21/2014 Scott Larson
 --     Replaced gated clock with clock enable
 --     Adjusted timing of SCL during start and stop conditions
+--   Version 2.2 02/05/2015 Scott Larson
+--     Corrected small SDA glitch introduced in version 2.1
 -- 
 --------------------------------------------------------------------------------
 
@@ -33,7 +35,7 @@ USE ieee.std_logic_unsigned.all;
 
 ENTITY i2c_master IS
   GENERIC(
-    input_clk : INTEGER := 100_000_000; --input clock speed from user logic in Hz
+    input_clk : INTEGER := 50_000_000; --input clock speed from user logic in Hz
     bus_clk   : INTEGER := 400_000);   --speed the i2c bus (scl) will run at in Hz
   PORT(
     clk       : IN     STD_LOGIC;                    --system clock
@@ -55,7 +57,6 @@ ARCHITECTURE logic OF i2c_master IS
   SIGNAL state         : machine;                        --state machine
   SIGNAL data_clk      : STD_LOGIC;                      --data clock for sda
   SIGNAL data_clk_prev : STD_LOGIC;                      --data clock during previous system clock
-  SIGNAL data_clk_m    : STD_LOGIC;                      --data clock during previous system clock  
   SIGNAL scl_clk       : STD_LOGIC;                      --constantly running internal scl
   SIGNAL scl_ena       : STD_LOGIC := '0';               --enables internal scl to output
   SIGNAL sda_int       : STD_LOGIC := '1';               --internal sda
@@ -69,27 +70,26 @@ BEGIN
 
   --generate the timing for the bus clock (scl_clk) and the data clock (data_clk)
   PROCESS(clk, reset_n)
-    VARIABLE count  	:  INTEGER RANGE 0 TO 4000;  --timing for clock generation
-           
+    VARIABLE count  :  INTEGER RANGE 0 TO divider*4;  --timing for clock generation
   BEGIN
     IF(reset_n = '0') THEN                --reset asserted
       stretch <= '0';
       count := 0;
     ELSIF(clk'EVENT AND clk = '1') THEN
       data_clk_prev <= data_clk;          --store previous value of data clock
-      IF(count = 4000) THEN        --end of timing cycle
+      IF(count = divider*4-1) THEN        --end of timing cycle
         count := 0;                       --reset timer
       ELSIF(stretch = '0') THEN           --clock stretching from slave not detected
         count := count + 1;               --continue clock generation timing
       END IF;
       CASE count IS
-        WHEN 0 TO 1000  =>            --first 1/4 cycle of clocking
+        WHEN 0 TO divider-1 =>            --first 1/4 cycle of clocking
           scl_clk <= '0';
           data_clk <= '0';
-        WHEN 1001 TO 2000 =>    --second 1/4 cycle of clocking
+        WHEN divider TO divider*2-1 =>    --second 1/4 cycle of clocking
           scl_clk <= '0';
           data_clk <= '1';
-        WHEN 2001 TO 3000 =>  --third 1/4 cycle of clocking
+        WHEN divider*2 TO divider*3-1 =>  --third 1/4 cycle of clocking
           scl_clk <= '1';                 --release scl
           IF(scl = '0') THEN              --detect if slave is stretching clock
             stretch <= '1';
@@ -155,8 +155,6 @@ BEGIN
             IF(bit_cnt = 0) THEN             --write byte transmit finished
               sda_int <= '1';                --release sda for slave acknowledge
               bit_cnt <= 7;                  --reset bit counter for "byte" states
---    added the following line to make sure busy = 0 in the slv_ack2 state              
-              busy <= '0';                   --continue is accepted    (modified by CU)          
               state <= slv_ack2;             --go to slave acknowledge (write)
             ELSE                             --next clock cycle of write state
               bit_cnt <= bit_cnt - 1;        --keep track of transaction bits
@@ -172,8 +170,6 @@ BEGIN
                 sda_int <= '1';              --send a no-acknowledge (before stop or repeated start)
               END IF;
               bit_cnt <= 7;                  --reset bit counter for "byte" states
---    added the following line to make sure busy = 0 in the mstr_ack state              
-              busy <= '0';                   --continue is accepted    (modified by CU)              
               data_rd <= data_rx;            --output received data
               state <= mstr_ack;             --go to master acknowledge
             ELSE                             --next clock cycle of read state
@@ -182,41 +178,35 @@ BEGIN
             END IF;
           WHEN slv_ack2 =>                   --slave acknowledge bit (write)
             IF(ena = '1') THEN               --continue transaction
---            busy <= '0';                   --continue is accepted   (modified by CU)           
+              busy <= '0';                   --continue is accepted
               addr_rw <= addr & rw;          --collect requested slave address and command
               data_tx <= data_wr;            --collect requested data to write
               IF(addr_rw = addr & rw) THEN   --continue transaction with another write
-                busy <= '1';                 --resume busy in the wr state (modified by CU)             
                 sda_int <= data_wr(bit_cnt); --write first bit of data
                 state <= wr;                 --go to write byte
               ELSE                           --continue transaction with a read or new slave
                 state <= start;              --go to repeated start
               END IF;
             ELSE                             --complete transaction
-            busy <= '0';                   --unflag busy  (modified by CU)
-            sda_int <= '1';                --sets sda high impedance (modified by CU)             
-            state <= stop;                 --go to stop bit
+              state <= stop;                 --go to stop bit
             END IF;
           WHEN mstr_ack =>                   --master acknowledge bit after a read
             IF(ena = '1') THEN               --continue transaction
---            busy <= '0';                   --continue is accepted   (modified by CU)
+              busy <= '0';                   --continue is accepted and data received is available on bus
               addr_rw <= addr & rw;          --collect requested slave address and command
               data_tx <= data_wr;            --collect requested data to write
               IF(addr_rw = addr & rw) THEN   --continue transaction with another read
-                busy <= '1';                 --resume busy in the wr state (modified by CU)               
                 sda_int <= '1';              --release sda from incoming data
                 state <= rd;                 --go to read byte
               ELSE                           --continue transaction with a write or new slave
                 state <= start;              --repeated start
               END IF;    
             ELSE                             --complete transaction
-              busy <= '0';                   --unflag busy  (modified by CU)
-              sda_int <= '1';                --sets sda high impedance (modified by CU)
-              state <= stop;                 --go to stop bit                             
+              state <= stop;                 --go to stop bit
             END IF;
           WHEN stop =>                       --stop bit of transaction
---              busy <= '0';                   --unflag busy  (modified by CU)           
-              state <= ready;                --go to idle state
+            busy <= '0';                     --unflag busy
+            state <= ready;                  --go to idle state
         END CASE;    
       ELSIF(data_clk = '0' AND data_clk_prev = '1') THEN  --data clock falling edge
         CASE state IS
@@ -241,23 +231,17 @@ BEGIN
             NULL;
         END CASE;
       END IF;
-    END IF; 
+    END IF;
   END PROCESS;  
 
-
   --set sda output
-  data_clk_m <= data_clk_prev and data_clk;         -- Modification added at CU
   WITH state SELECT
-    sda_ena_n <= data_clk WHEN start,       --generate start condition
-                 NOT data_clk_m WHEN stop,  --generate stop condition (modification added at CU)
-                 sda_int WHEN OTHERS;       --set to internal sda signal     
+    sda_ena_n <= data_clk_prev WHEN start,     --generate start condition
+                 NOT data_clk_prev WHEN stop,  --generate stop condition
+                 sda_int WHEN OTHERS;          --set to internal sda signal    
       
   --set scl and sda outputs
   scl <= '0' WHEN (scl_ena = '1' AND scl_clk = '0') ELSE 'Z';
   sda <= '0' WHEN sda_ena_n = '0' ELSE 'Z';
-  
--- Following two signals will be used for tristate obuft (did not work)
---  scl <= '1' WHEN (scl_ena = '1' AND scl_clk = '0') ELSE '0';
---  sda <= '1' WHEN sda_ena_n = '0' ELSE '0';
   
 END logic;

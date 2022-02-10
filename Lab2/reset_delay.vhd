@@ -24,8 +24,8 @@ BEGIN
  BEGIN
 
 	  WAIT UNTIL rising_edge (iCLK);
---	  IF Cont /= X"FFFFF" THEN --hardware
-	  IF Cont /= X"00001" THEN --software
+	  IF Cont /= X"FFFFF" THEN --hardware
+--	  IF Cont /= X"00001" THEN --software
 		  Cont <= Cont + 1;	
 		  oRESET <= '1';	
 	  ELSE

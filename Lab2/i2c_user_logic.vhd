@@ -8,6 +8,7 @@ entity i2c_user_logic is
 		clk      : in    std_logic;                     --clock input
 		reset_h  : in    std_logic;                     --active-high reset
 		data_hex : in    std_logic_vector(15 downto 0); --the data to display on the seven segments
+		address_hex : in std_logic_vector(7 downto 0);  --The address to display.
 		
 		sda      : inout std_logic;                     --i2c data
 		scl      : inout std_logic                      --i2c clock
@@ -43,6 +44,7 @@ architecture behavioral of i2c_user_logic is
 	signal first  : std_logic;                         --is this the first run through (repeat config data)
 	signal addr_1 : std_logic_vector(7 downto 0);      --address of device 1
 	signal addr_2 : std_logic_vector(7 downto 0);      --address of device 2
+	signal data_disp : std_logic_vector(15 downto 0);
 	
 	--i2c master signals
 	signal reset_n     : std_logic;                    --active-low reset
@@ -55,8 +57,8 @@ architecture behavioral of i2c_user_logic is
 	
 	reset_n <= not reset_h;
 	state <= next_state;
-	addr_1 <= x"71";
-	addr_2 <= x"71";
+	addr_1 <= x"70"; --show address
+	addr_2 <= x"71"; --show data
 	
 	Inst_i2c_master : i2c_master
 		port map(
@@ -113,7 +115,7 @@ architecture behavioral of i2c_user_logic is
 							address_sel <= not address_sel; --with the second address
 							first       <= '0';             --and clear the first flag
 						else                               --otherwise, this is a normal repeat
-							byteSel <= 7;                   --so go back to the repeating bytes
+							byteSel <= 9;                   --so go back to the repeating bytes
 							address_sel <= not address_sel; --and change addresses
 						end if;
 						next_state <= start;
@@ -127,8 +129,8 @@ architecture behavioral of i2c_user_logic is
 	process(address_sel)
 	begin
 		case(address_sel) is
-			when '0' => i2c_address <= addr_1;
-			when '1' => i2c_address <= addr_2;
+			when '0' => i2c_address <= addr_2; data_disp <= x"00" & address_hex;
+			when '1' => i2c_address <= addr_1; data_disp <= data_hex;
 			when others => null;
 		end case;
 	end process;
@@ -143,13 +145,13 @@ architecture behavioral of i2c_user_logic is
 			when 3      => i2c_data <= X"7A";
 			when 4      => i2c_data <= X"FF";
 			when 5      => i2c_data <= X"77";
-			when 6      => i2c_data <= X"FF";
+			when 6      => i2c_data <= X"00";
 			when 7      => i2c_data <= X"79"; --Repeat here
 			when 8      => i2c_data <= X"00";
-			when 9      => i2c_data <= X"0"&data_hex(15 downto 12);
-			when 10     => i2c_data <= X"0"&data_hex(11 downto 8);
-			when 11     => i2c_data <= X"0"&data_hex(7  downto 4);
-			when 12     => i2c_data <= X"0"&data_hex(3  downto 0);
+			when 9      => i2c_data <= X"0"&data_disp(15 downto 12);
+			when 10     => i2c_data <= X"0"&data_disp(11 downto 8);
+			when 11     => i2c_data <= X"0"&data_disp(7  downto 4);
+			when 12     => i2c_data <= X"0"&data_disp(3  downto 0);
 			when others => i2c_data <= X"76";
 		end case;
 	end process;
