@@ -29,14 +29,14 @@ Debugging:
 	- PWM Frequencies - hopefully good
 	- PWM on/off: abuse the clk_en pin
 	- LCD Refresh - fix when under reset
+		- Add "reset_delay" to refresh the LCD on button presses
+		- As opposed to hoping the clk_en comes at the right time
 	- Make it run off of the SRAM again
 	- i2c at all
 		- Set up second address
 		- Make separate address/data groups in the i2c user_logic muxes
+		
 
 IN PROGRESS:
-Debugging (obviously)
-	- Add "reset_delay" to refresh the LCD on button presses
-		- As opposed to hoping the clk_en comes at the right time
 
 NOT STARTED:

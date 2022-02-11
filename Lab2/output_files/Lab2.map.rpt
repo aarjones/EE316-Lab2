@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Lab2
-Thu Feb 10 16:10:08 2022
+Fri Feb 11 12:09:20 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
 
 
@@ -73,15 +73,15 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                          ;
 +------------------------------------+--------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Feb 10 16:10:08 2022            ;
+; Analysis & Synthesis Status        ; Successful - Fri Feb 11 12:09:20 2022            ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Full Version ;
 ; Revision Name                      ; Lab2                                             ;
 ; Top-level Entity Name              ; DE2_115                                          ;
 ; Family                             ; Cyclone IV E                                     ;
-; Total logic elements               ; 1,585                                            ;
-;     Total combinational functions  ; 1,339                                            ;
-;     Dedicated logic registers      ; 918                                              ;
-; Total registers                    ; 918                                              ;
+; Total logic elements               ; 1,639                                            ;
+;     Total combinational functions  ; 1,393                                            ;
+;     Dedicated logic registers      ; 941                                              ;
+; Total registers                    ; 941                                              ;
 ; Total pins                         ; 95                                               ;
 ; Total virtual pins                 ; 0                                                ;
 ; Total memory bits                  ; 135,168                                          ;
@@ -273,29 +273,29 @@ applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 1,585          ;
+; Estimated Total logic elements              ; 1,639          ;
 ;                                             ;                ;
-; Total combinational functions               ; 1339           ;
+; Total combinational functions               ; 1393           ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 561            ;
-;     -- 3 input functions                    ; 304            ;
-;     -- <=2 input functions                  ; 474            ;
+;     -- 4 input functions                    ; 566            ;
+;     -- 3 input functions                    ; 299            ;
+;     -- <=2 input functions                  ; 528            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 1032           ;
-;     -- arithmetic mode                      ; 307            ;
+;     -- normal mode                          ; 1063           ;
+;     -- arithmetic mode                      ; 330            ;
 ;                                             ;                ;
-; Total registers                             ; 918            ;
-;     -- Dedicated logic registers            ; 918            ;
+; Total registers                             ; 941            ;
+;     -- Dedicated logic registers            ; 941            ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 95             ;
 ; Total memory bits                           ; 135168         ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ; Maximum fan-out node                        ; CLOCK_50~input ;
-; Maximum fan-out                             ; 668            ;
-; Total fan-out                               ; 7761           ;
-; Average fan-out                             ; 3.05           ;
+; Maximum fan-out                             ; 691            ;
+; Total fan-out                               ; 7918           ;
+; Average fan-out                             ; 3.02           ;
 +---------------------------------------------+----------------+
 
 
@@ -304,9 +304,9 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                                                              ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                                                                                                                                          ; Library Name ;
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_115                                                                                                ; 1339 (1)          ; 918 (0)      ; 135168      ; 0            ; 0       ; 0         ; 95   ; 0            ; |DE2_115                                                                                                                                                                                                                                                                                                                                     ; work         ;
-;    |sld_hub:auto_hub|                                                                                   ; 120 (1)           ; 86 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
-;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 119 (81)          ; 86 (58)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
+; |DE2_115                                                                                                ; 1393 (1)          ; 941 (0)      ; 135168      ; 0            ; 0       ; 0         ; 95   ; 0            ; |DE2_115                                                                                                                                                                                                                                                                                                                                     ; work         ;
+;    |sld_hub:auto_hub|                                                                                   ; 119 (1)           ; 86 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub                                                                                                                                                                                                                                                                                                                    ; work         ;
+;       |sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|                                                    ; 118 (80)          ; 86 (58)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst                                                                                                                                                                                                                                                                       ; work         ;
 ;          |sld_rom_sr:hub_info_reg|                                                                      ; 21 (21)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg                                                                                                                                                                                                                                               ; work         ;
 ;          |sld_shadow_jsm:shadow_jsm|                                                                    ; 17 (17)           ; 19 (19)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_shadow_jsm:shadow_jsm                                                                                                                                                                                                                                             ; work         ;
 ;    |sld_signaltap:auto_signaltap_0|                                                                     ; 360 (1)           ; 414 (2)      ; 131072      ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_signaltap:auto_signaltap_0                                                                                                                                                                                                                                                                                                      ; work         ;
@@ -343,14 +343,14 @@ applicable agreement for further details.
 ;                |lpm_shiftreg:ram_data_shift_out|                                                        ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_signaltap:auto_signaltap_0|sld_signaltap_impl:sld_signaltap_body|sld_signaltap_implb:sld_signaltap_body|sld_offload_buffer_mgr:\stp_non_zero_depth_offload_gen:stp_offload_buff_mgr_inst|lpm_shiftreg:ram_data_shift_out                                                                                                        ; work         ;
 ;                |lpm_shiftreg:status_data_shift_out|                                                     ; 35 (35)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_signaltap:auto_signaltap_0|sld_signaltap_impl:sld_signaltap_body|sld_signaltap_implb:sld_signaltap_body|sld_offload_buffer_mgr:\stp_non_zero_depth_offload_gen:stp_offload_buff_mgr_inst|lpm_shiftreg:status_data_shift_out                                                                                                     ; work         ;
 ;             |sld_rom_sr:crc_rom_sr|                                                                     ; 19 (19)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|sld_signaltap:auto_signaltap_0|sld_signaltap_impl:sld_signaltap_body|sld_signaltap_implb:sld_signaltap_body|sld_rom_sr:crc_rom_sr                                                                                                                                                                                                   ; work         ;
-;    |top_level:Inst_top_level|                                                                           ; 858 (25)          ; 418 (0)      ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level                                                                                                                                                                                                                                                                                                            ; work         ;
+;    |top_level:Inst_top_level|                                                                           ; 913 (25)          ; 441 (0)      ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level                                                                                                                                                                                                                                                                                                            ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_0|                                                                ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_0                                                                                                                                                                                                                                                                           ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_1|                                                                ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_1                                                                                                                                                                                                                                                                           ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_2|                                                                ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_2                                                                                                                                                                                                                                                                           ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_3|                                                                ; 5 (5)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_3                                                                                                                                                                                                                                                                           ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_4|                                                                ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_4                                                                                                                                                                                                                                                                           ; work         ;
 ;       |HEX_to_ASCII:Inst_HEX_to_ASCII_5|                                                                ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|HEX_to_ASCII:Inst_HEX_to_ASCII_5                                                                                                                                                                                                                                                                           ; work         ;
-;       |LCD_User_Logic:Inst_LCD_User_Logic|                                                              ; 321 (287)         ; 80 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic                                                                                                                                                                                                                                                                         ; work         ;
+;       |LCD_User_Logic:Inst_LCD_User_Logic|                                                              ; 326 (292)         ; 80 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic                                                                                                                                                                                                                                                                         ; work         ;
 ;          |LCD_Transmitter:Inst_LCD_Transmitter|                                                         ; 34 (34)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|LCD_Transmitter:Inst_LCD_Transmitter                                                                                                                                                                                                                                    ; work         ;
 ;       |PWM:Inst_PWM|                                                                                    ; 19 (19)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|PWM:Inst_PWM                                                                                                                                                                                                                                                                                               ; work         ;
 ;       |ROM1Port:Inst_ROM1_Port|                                                                         ; 0 (0)             ; 0 (0)        ; 4096        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|ROM1Port:Inst_ROM1_Port                                                                                                                                                                                                                                                                                    ; work         ;
@@ -363,9 +363,9 @@ applicable agreement for further details.
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_pwm|                                                       ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm                                                                                                                                                                                                                                                                  ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_reset|                                                     ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset                                                                                                                                                                                                                                                                ; work         ;
 ;       |btn_debounce_toggle:Inst_BTN_Debounce_speed|                                                     ; 25 (25)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed                                                                                                                                                                                                                                                                ; work         ;
-;       |i2c_user_logic:Inst_i2c_user_logic|                                                              ; 136 (49)          ; 48 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic                                                                                                                                                                                                                                                                         ; work         ;
-;          |i2c_master:Inst_i2c_master|                                                                   ; 87 (87)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master                                                                                                                                                                                                                                              ; work         ;
-;       |system_controller:Inst_system_controller|                                                        ; 132 (132)         ; 81 (81)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller                                                                                                                                                                                                                                                                   ; work         ;
+;       |i2c_user_logic:Inst_i2c_user_logic|                                                              ; 137 (49)          ; 48 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic                                                                                                                                                                                                                                                                         ; work         ;
+;          |i2c_master:Inst_i2c_master|                                                                   ; 88 (88)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master                                                                                                                                                                                                                                              ; work         ;
+;       |system_controller:Inst_system_controller|                                                        ; 181 (181)         ; 104 (104)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller                                                                                                                                                                                                                                                                   ; work         ;
 +---------------------------------------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -529,8 +529,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 918   ;
-; Number of registers using Synchronous Clear  ; 127   ;
+; Total registers                              ; 941   ;
+; Number of registers using Synchronous Clear  ; 126   ;
 ; Number of registers using Synchronous Load   ; 50    ;
 ; Number of registers using Asynchronous Clear ; 282   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -571,13 +571,13 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|sda_int                                                                                 ; 2       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_sync[0]                                                                                               ; 2       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_sync[1]                                                                                               ; 1       ;
-; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[0]                                                                                                 ; 2       ;
-; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[1]                                                                                                 ; 1       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[0]                                                                                               ; 2       ;
 ; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_sync[1]                                                                                               ; 1       ;
+; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[0]                                                                                                 ; 2       ;
+; top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_sync[1]                                                                                                 ; 1       ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[2]                                                                              ; 11      ;
 ; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[1]                                                                              ; 13      ;
-; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[0]                                                                              ; 15      ;
+; top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[0]                                                                              ; 16      ;
 ; sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|tdo                                                                                                              ; 1       ;
 ; sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|jtag_ir_reg[2]                                                                                                   ; 2       ;
 ; sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|jtag_ir_reg[1]                                                                                                   ; 3       ;
@@ -609,37 +609,38 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_out[0]                      ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 0 LEs                ; 14 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[7]     ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_out[4]                      ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 0 LEs                ; 14 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|data_tx[0]     ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_reset|btn_cntr[5]                      ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_cntr[15]                       ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_cntr[15]                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_cntr[12]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pwm|btn_cntr[5]                        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_pause|btn_cntr[11]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|btn_debounce_toggle:Inst_BTN_Debounce_speed|btn_cntr[2]                      ;
 ; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[3]                                ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|PWM:Inst_PWM|counter[6]                                                      ;
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|PWM:Inst_PWM|counter[2]                                                      ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[1]                                ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|byteSel[0]                                ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[2]                                ;
-; 5:1                ; 9 bits    ; 27 LEs        ; 9 LEs                ; 18 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|ROM_cnt[0]                          ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[25]                                 ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|cont_io_out[6]                          ;
-; 110:1              ; 5 bits    ; 365 LEs       ; 305 LEs              ; 60 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|currentByte_wr[2]                         ;
-; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_cnt[3]                      ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[0]     ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[4]                           ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[1]                           ;
-; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[6]                                  ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|next_state.write1                       ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byteSel[1]                                ;
+; 5:1                ; 9 bits    ; 27 LEs        ; 9 LEs                ; 18 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|ROM_cnt[2]                          ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[22]                                 ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|cont_io_out[1]                          ;
+; 110:1              ; 5 bits    ; 365 LEs       ; 305 LEs              ; 60 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|currentByte_wr[6]                         ;
+; 9:1                ; 24 bits   ; 144 LEs       ; 24 LEs               ; 120 LEs                ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|LCD_cont[13]                        ;
+; 9:1                ; 8 bits    ; 48 LEs        ; 8 LEs                ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|system_controller:Inst_system_controller|address_cnt[0]                      ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|i2c_master:Inst_i2c_master|bit_cnt[2]     ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[2]                           ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|byte_end_int[3]                           ;
+; 5:1                ; 20 bits   ; 60 LEs        ; 20 LEs               ; 40 LEs                 ; Yes        ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|count[12]                                 ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|SRAM_Controller:Inst_SRAM_Controller|next_state.read1                        ;
 ; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state                                ;
 ; 8:1                ; 2 bits    ; 10 LEs        ; 8 LEs                ; 2 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|next_state                                ;
-; 17:1               ; 4 bits    ; 44 LEs        ; 36 LEs               ; 8 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|Mux7                                      ;
-; 10:1               ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.busy_high                           ;
-; 12:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.repeat                              ;
+; 17:1               ; 4 bits    ; 44 LEs        ; 36 LEs               ; 8 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|i2c_user_logic:Inst_i2c_user_logic|Mux4                                      ;
+; 10:1               ; 3 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.start                               ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 6 LEs                ; 10 LEs                 ; No         ; |DE2_115|top_level:Inst_top_level|LCD_User_Logic:Inst_LCD_User_Logic|state.data_valid                          ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|hub_minor_ver_reg[0]                    ;
 ; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|mixer_addr_reg[4]                       ;
 ; 5:1                ; 5 bits    ; 15 LEs        ; 5 LEs                ; 10 LEs                 ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|word_counter[0] ;
 ; 6:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|irsr_reg[2]                             ;
-; 34:1               ; 4 bits    ; 88 LEs        ; 56 LEs               ; 32 LEs                 ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[3]                      ;
+; 34:1               ; 4 bits    ; 88 LEs        ; 60 LEs               ; 28 LEs                 ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|design_hash_reg[3]                      ;
 ; 20:1               ; 4 bits    ; 52 LEs        ; 36 LEs               ; 16 LEs                 ; Yes        ; |DE2_115|sld_hub:auto_hub|sld_jtag_hub:\jtag_hub_gen:sld_jtag_hub_inst|sld_rom_sr:hub_info_reg|WORD_SR[0]      ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------------------------------------+
 
@@ -974,7 +975,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Full Version
-    Info: Processing started: Thu Feb 10 16:09:54 2022
+    Info: Processing started: Fri Feb 11 12:09:06 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Lab2 -c Lab2
 Info (11104): Parallel Compilation has detected 16 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 8 of the 8 physical processors detected instead.
 Info (12021): Found 2 design units, including 1 entities, in source file i2c_master.vhd
@@ -1243,15 +1244,15 @@ Info (286031): Timing-Driven Synthesis is running on partition "sld_hub:auto_hub
 Info (35024): Succesfully connected in-system debug instance "auto_signaltap_0" to all 3 required data inputs, trigger inputs, acquisition clocks, and dynamic pins
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1783 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1839 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 31 output pins
     Info (21060): Implemented 60 bidirectional pins
-    Info (21061): Implemented 1651 logic cells
+    Info (21061): Implemented 1707 logic cells
     Info (21064): Implemented 32 RAM segments
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 129 warnings
-    Info: Peak virtual memory: 4738 megabytes
-    Info: Processing ended: Thu Feb 10 16:10:08 2022
+    Info: Peak virtual memory: 4740 megabytes
+    Info: Processing ended: Fri Feb 11 12:09:20 2022
     Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:07
 

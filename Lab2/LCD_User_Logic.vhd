@@ -252,7 +252,7 @@ process(iClk, reset_h)
 									byteSel      <= byte_start;
 									byte_end_int <= byte_end;
 								end if;
-								count <= X"00000FF";
+								count <= X"0000002";
                     end if;
 						  state <= start;
             end case;
