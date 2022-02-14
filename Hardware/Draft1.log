@@ -1,0 +1,60 @@
+Circuit: * C:\EE316-Lab2\Hardware\Draft1.asc
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+Gmin = 6.87765e-005
+vernier = 0.0625
+vernier = 0.0833333
+Gmin = 5.92243e-005
+vernier = 0.111111
+Gmin = 4.62685e-005
+vernier = 0.148148
+vernier = 0.197531
+Gmin = 3.0675e-005
+vernier = 0.263374
+vernier = 0.351165
+Gmin = 1.6057e-005
+vernier = 0.46822
+Gmin = 5.90248e-006
+vernier = 0.624294
+vernier = 0.832392
+Gmin = 1.16068e-006
+vernier = 1
+Gmin = 1.33422e-007
+Gmin = 1.43261e-008
+Gmin = 1.53826e-009
+Gmin = 1.65169e-010
+Gmin = 1.77349e-011
+Gmin = 1.90427e-012
+Gmin = 2.04469e-013
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+
+Date: Mon Feb 07 14:43:54 2022
+Total elapsed time: 0.305 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 7742
+traniter = 6807
+tranpoints = 3377
+accept = 2870
+rejected = 507
+matrix size = 139
+fillins = 166
+solver = Normal
+Thread vector: 30.0/14.5[3] 3.2/1.8[3] 7.2/3.4[3] 1.6/2.8[1]  2592/500
+Matrix Compiler1: 16.68 KB object code size  7.2/3.2/[1.2]
+Matrix Compiler2: 14.11 KB object code size  4.5/6.5/[2.0]
+
